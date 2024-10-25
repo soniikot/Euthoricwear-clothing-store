@@ -1,24 +1,24 @@
-# Strapi API Dockerfile
+# Client Dockerfile
 # Use an official Node.js runtime as the base image
-FROM node:20-alpine AS build
+FROM node:20
 
 # Set the working directory in the container
-WORKDIR /app
+WORKDIR /api
 
 # Copy the package.json and package-lock.json files
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm ci
 
 # Copy the rest of the app files
 COPY . .
 
-# Build Strapi (optional, depending on how you build it)
+# Build the app (replace this with your build command if it's different)
 RUN npm run build
 
-# Expose the Strapi default port
+# Expose the port the app runs on
 EXPOSE 1337
 
-# Start Strapi
+# Run the app
 CMD ["npm", "run", "develop"]
