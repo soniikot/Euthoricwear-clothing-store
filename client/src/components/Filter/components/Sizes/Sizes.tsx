@@ -5,12 +5,18 @@ import { setSizes } from '@/features/filter/filterSlice';
 import { useState } from 'react';
 import clsx from 'clsx';
 
+
+
 export const Sizes: FC = () => {
   const dispatch = useAppDispatch();
-  const [selectedSize, setSelectedSize] = useState('');
+
+  // seems like you don't need to have local state here. you can take initial value from 
+  // the global state
+  // rerender will happen on global state size change
+
+  const selectedSize = useAppSelector((state: RootState) => state.filter.size);
 
   const handleSizeChange = (size: string) => {
-    setSelectedSize(size);
     dispatch(setSizes(size));
   };
 
