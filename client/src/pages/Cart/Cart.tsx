@@ -29,6 +29,8 @@ export const Cart: FC = () => {
   );
 
   const dispatch = useAppDispatch();
+
+  //TODO put this into a custom hoo 
   const stripePromise = loadStripe(
     'pk_test_51Q9wuPAoB7FsfDJTAWmTQwiO12bwE2ipelQqXrw65HsfYgorAJC9APIjY9KF67q6W5HnKzlniB2qfyAgNqTGr05t00hIIn4Jpx'
   );
@@ -58,6 +60,8 @@ export const Cart: FC = () => {
     dispatch(removeItem(id));
   };
 
+
+// rename getSubtotalPrice => rule for naming functions is to have verb in the prefix
   const subTotalPrice = () => {
     let total = 0;
     cart.forEach((item) => {

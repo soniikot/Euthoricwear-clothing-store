@@ -16,9 +16,9 @@ export const Links: FC<LinksWithProps> = ({ id }) => {
 
   return (
     <h5>
-      <Link to="/products">Shop </Link>&gt;
+      <Link to="/products">Shop</Link>&gt;
       {products.length > 0 &&
-        gender.charAt(0).toUpperCase() + gender.slice(1)}{' '}
+        gender.charAt(0).toUpperCase() + gender.slice(1)}
       &gt;
       {products.length > 0 &&
         subcategory.charAt(0).toUpperCase() + subcategory.slice(1)}
