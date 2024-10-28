@@ -37,7 +37,7 @@ export const fetchCategories = createAsyncThunk(
       `${import.meta.env.VITE_API_URL + '/categories?populate=subcategories.img'}`,
       {
         headers: {
-          Authorization: `bearer ${import.meta.env.VITE_API_TOKEN}`,
+          Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
         },
       }
     );

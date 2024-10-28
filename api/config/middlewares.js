@@ -6,7 +6,7 @@ module.exports = [
   {
     name: "strapi::cors",
     config: {
-      origin: ["http://62.72.5.244:5173"],
+      origin: ["*"],
       headers: "*",
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     },
