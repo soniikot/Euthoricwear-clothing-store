@@ -25,7 +25,7 @@ export const fetchProducts = createAsyncThunk(
       `${import.meta.env.VITE_API_URL + '/products?populate=*'}`,
       {
         headers: {
-          Authorization: `bearer ${import.meta.env.VITE_API_TOKEN}`,
+          Authorization: `Bearer ${import.meta.env.VITE_API_TOKEN}`,
         },
       }
     );
