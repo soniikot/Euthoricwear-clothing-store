@@ -3,13 +3,13 @@ module.exports = [
   "strapi::errors",
   "strapi::security",
 
-  // Other middlewares...
   {
     name: "strapi::cors",
     config: {
-      origin: ["https://62.72.5.244:5173"],
+      origin: ["http://62.72.5.244:5173"],
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       allowedHeaders: ["Content-Type", "Authorization"],
+      credentials: true,
     },
   },
 
