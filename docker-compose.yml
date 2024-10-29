@@ -28,5 +28,11 @@ services:
       JWT_SECRET: ${JWT_SECRET}
       STRIPE_KEY: ${STRIPE_KEY}
       CLIENT_URL: ${CLIENT_URL}
+      HOST: 0.0.0.0
+      PORT: 1337
+      APP_KEYS: ${APP_KEYS}
+      API_TOKEN_SALT: ${API_TOKEN_SALT}
+      ADMIN_JWT_SECRET: ${ ADMIN_JWT_SECRET}
+      TRANSFER_TOKEN_SALT: ${TRANSFER_TOKEN_SALT}
 networks:
   strapi:
