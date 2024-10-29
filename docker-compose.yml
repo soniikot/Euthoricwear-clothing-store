@@ -26,6 +26,7 @@ services:
       DATABASE_CLIENT: sqlite
       DATABASE_FILENAME: .tmp/data.db
       JWT_SECRET: ${JWT_SECRET}
-
+      STRIPE_KEY: ${STRIPE_KEY}
+      CLIENT_URL: ${CLIENT_URL}
 networks:
   strapi:
