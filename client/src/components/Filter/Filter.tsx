@@ -11,36 +11,22 @@ import { Sizes } from './components/Sizes/Sizes';
 import { FC } from 'react';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { RootState } from '@/app/store';
-import {
-  resetFilter,
-  setCategory,
-  setPriceRange,
-} from '@/features/filter/filterSlice';
-import clsx from 'clsx';
+import { resetFilter, setPriceRange } from '@/features/filter/filterSlice';
 import style from './styles.module.scss';
 import filterIcon from '@assets/filter.svg';
-import linkArrow from '@/assets/link-arrow.svg';
-import { CATEGORIES } from './constants';
+import { CategoryCollapse } from './components/CategoryCollapse/CategoryCollapse';
 
 export const Filter: FC = () => {
   const priceRange = useAppSelector((state: RootState) => state.filter.price);
+  const theme = useTheme();
 
-  const filteredCategory = useAppSelector(
-    (state: RootState) => state.filter.category
-  );
   const dispatch = useAppDispatch();
 
-  const [openCategory, setOpenCategory] = useState(false);
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  //const [openCategory, setOpenCategory] = useState(false);
   const [openPrice, setOpenPrice] = useState(false);
   const [openColors, setOpenColors] = useState(false);
   const [openSize, setOpenSize] = useState(false);
-
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
-
-  const handleCategoryChange = (category: string) => {
-    dispatch(setCategory(category));
-  };
 
   const handleResetFilter = () => {
     dispatch(resetFilter());
@@ -67,37 +53,7 @@ export const Filter: FC = () => {
       </div>
 
       <div>
-        <Button
-          className={style.header}
-          onClick={() => setOpenCategory(!openCategory)}
-        >
-          Categories
-        </Button>
-        <Collapse
-          in={openCategory}
-          style={
-            isSmallScreen
-              ? { position: 'absolute', zIndex: 10, backgroundColor: 'white' }
-              : {}
-          }
-        >
-          <div className={style.categories}>
-            <ul className={style.subcategory_wrapper}>
-              {CATEGORIES.map((subcategory: string) => (
-                <li
-                  key={subcategory}
-                  onClick={() => handleCategoryChange(subcategory)}
-                  className={clsx(style.subcategory, {
-                    [style.active]: filteredCategory === subcategory,
-                  })}
-                >
-                  {subcategory}
-                  <img src={linkArrow} alt="link" />
-                </li>
-              ))}
-            </ul>
-          </div>
-        </Collapse>
+        <CategoryCollapse />
       </div>
 
       <div>
