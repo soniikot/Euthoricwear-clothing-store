@@ -105,6 +105,9 @@ export const selectProducts = createAppSelector(
     filterGender,
     products
   ) => {
+    if (!Array.isArray(products)) {
+      return [];
+    }
     let filteredProducts = products;
 
     if (searchQuery) {

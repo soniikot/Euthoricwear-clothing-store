@@ -24,7 +24,7 @@ import { CATEGORIES } from './constants';
 
 export const Filter: FC = () => {
   const priceRange = useAppSelector((state: RootState) => state.filter.price);
-  const [range, setRange] = useState(priceRange);
+
   const filteredCategory = useAppSelector(
     (state: RootState) => state.filter.category
   );
@@ -50,7 +50,7 @@ export const Filter: FC = () => {
     if (!Array.isArray(newValue)) {
       throw new Error('Price range is not a number array');
     }
-    setRange(newValue);
+
     dispatch(setPriceRange(newValue));
   };
 
@@ -118,15 +118,15 @@ export const Filter: FC = () => {
           <div className={style.slider}>
             <div style={{ width: '225px', padding: '5px' }}>
               <Slider
-                value={range}
+                value={priceRange}
                 onChange={(_event, value) => handlePriceChanges(value)}
                 color="secondary"
                 min={0}
                 max={200}
               />
               <div className={style.range}>
-                <button className={style.button}>{range[0]}</button>
-                <button className={style.button}>{range[1]}</button>
+                <button className={style.button}>{priceRange[0]}</button>
+                <button className={style.button}>{priceRange[1]}</button>
               </div>
             </div>
           </div>

@@ -2,7 +2,7 @@ import { FC, useState } from 'react';
 import { type SyntheticEvent } from 'react';
 import style from './styles.module.scss';
 import { Box } from '@mui/material';
-import { TabPanel, TabContext, TabList } from '@mui/lab';
+import { TabContext, TabList } from '@mui/lab';
 import product_table from '@assets/product_table.png';
 import { CustomTab } from './components/CustomTab/CustomTab';
 import { CustomTabPanel } from './components/CustomTabPanel/CustomTabPanel';
