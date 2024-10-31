@@ -12,7 +12,6 @@ module.exports = createCoreController("api::order.order", ({ strapi }) => ({
   async create(ctx) {
     const { cart } = ctx.request.body;
     try {
-      console.log("Cart received:", cart);
       const lineItems = await Promise.all(
         cart.map(async (product) => {
           const item = await strapi

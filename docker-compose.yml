@@ -1,0 +1,37 @@
+version: "3.8"
+
+services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    networks:
+      - strapi
+    environment:
+      VITE_API_URL: ${VITE_API_URL}
+      VITE_API_UPLOAD_URL: ${VITE_API_UPLOAD_URL}
+      VITE_API_TOKEN: ${VITE_API_TOKEN}
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports:
+      - "1337:1337"
+    networks:
+      - strapi
+    environment:
+      DATABASE_CLIENT: sqlite
+      DATABASE_FILENAME: .tmp/data.db
+      JWT_SECRET: ${JWT_SECRET}
+      STRIPE_KEY: ${STRIPE_KEY}
+      CLIENT_URL: ${CLIENT_URL}
+      HOST: 0.0.0.0
+      PORT: 1337
+      APP_KEYS: ${APP_KEYS}
+      API_TOKEN_SALT: ${API_TOKEN_SALT}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+networks:
+  strapi:
