@@ -1,0 +1,9 @@
+@import '../../styles/variables.scss';
+
+.button_checkout {
+  border-radius: 10px;
+  padding: 10px 50px;
+
+  color: white;
+  background-color: $--purple-color;
+}
