@@ -8,7 +8,6 @@ import { useAppDispatch } from '@/app/hooks';
 import { useAppSelector } from '@/app/hooks';
 import { RootState } from '@/app/store';
 import { setPriceRange } from '@/features/filter/filterSlice';
-import linkArrow from '@/assets/link-arrow.svg';
 import { Slider } from '@mui/material';
 
 export const PriceCollapse: FC = () => {
