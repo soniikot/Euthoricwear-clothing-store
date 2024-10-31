@@ -1,6 +1,6 @@
 import style from './styles.module.scss';
-import img1 from '@/assets/sample1.jpg';
-import img2 from '@/assets/sample2.jpg';
+import sampleImage from '@/assets/sample1.jpg';
+import sampleImage2 from '@/assets/sample2.jpg';
 import { ProductsDescription } from '@/components/ProductDescription/ProductsDescription';
 import { BottomDescription } from '@/components/BottomDescription/BottomDescription';
 import { SectionTitle } from '@/shared/components/SectionTitle/SectionTitle';
@@ -19,12 +19,13 @@ export const ProductPage = () => {
   const [selectedImg, setSelectedImg] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    if (products.length > 0) {
-      const initialImage =
-        import.meta.env.VITE_API_UPLOAD_URL +
-        products[id].attributes.img.data.attributes.url;
-      setSelectedImg(initialImage);
+    if (products.length === 0) {
+      return;
     }
+    const initialImage =
+      import.meta.env.VITE_API_UPLOAD_URL +
+      products[id].attributes.img.data.attributes.url;
+    setSelectedImg(initialImage);
   }, [products, id]);
 
   return (
@@ -54,20 +55,20 @@ export const ProductPage = () => {
               />
             )}
             <img
-              src={img1}
+              src={sampleImage}
               alt="sample"
               className={clsx(style.image, {
-                [style.selected_image]: selectedImg === img1,
+                [style.selected_image]: selectedImg === sampleImage,
               })}
-              onClick={(_e) => setSelectedImg(img1)}
+              onClick={(_e) => setSelectedImg(sampleImage)}
             />
             <img
-              src={img2}
+              src={sampleImage2}
               alt="sample"
               className={clsx(style.image, {
-                [style.selected_image]: selectedImg === img2,
+                [style.selected_image]: selectedImg === sampleImage2,
               })}
-              onClick={(_e) => setSelectedImg(img2)}
+              onClick={(_e) => setSelectedImg(sampleImage2)}
             />
           </div>
           <div className={style.photo_wrapper}>

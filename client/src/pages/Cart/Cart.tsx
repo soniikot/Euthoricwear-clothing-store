@@ -10,8 +10,7 @@ import { useAppDispatch } from '@/app/hooks';
 import { removeItem } from '../../features/cart/cartSlice';
 import { FC } from 'react';
 import { EmptyList } from '@/components/EmptyList/EmptyList';
-import { makeRequest } from '@/makeRequest';
-import { loadStripe } from '@stripe/stripe-js';
+import { PaymentButton } from '@/components/PaymentButton/PaymentButton';
 
 export interface CartData {
   id: number;
@@ -30,39 +29,11 @@ export const Cart: FC = () => {
 
   const dispatch = useAppDispatch();
 
-  //TODO put this into a custom hoo 
-  const stripePromise = loadStripe(
-    'pk_test_51Q9wuPAoB7FsfDJTAWmTQwiO12bwE2ipelQqXrw65HsfYgorAJC9APIjY9KF67q6W5HnKzlniB2qfyAgNqTGr05t00hIIn4Jpx'
-  );
-
-  const handlePayment = async () => {
-    try {
-      const stripe = await stripePromise;
-
-      if (stripe === null) {
-        return;
-      }
-      console.log(`Cart/Cart.tsx - line: 44 ->> `);
-
-      const res = await makeRequest.post('/orders', { cart });
-
-      console.log(`Cart/Cart.tsx - line: 47 ->> res`, res);
-
-      await stripe.redirectToCheckout({
-        sessionId: res.data.stripeSession.id,
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   const handleDeleteItem = (id: number) => {
     dispatch(removeItem(id));
   };
 
-
-// rename getSubtotalPrice => rule for naming functions is to have verb in the prefix
-  const subTotalPrice = () => {
+  const getSubtotalPrice = () => {
     let total = 0;
     cart.forEach((item) => {
       total += item.quantity * item.price;
@@ -160,7 +131,7 @@ export const Cart: FC = () => {
           <div className={style.text}>
             <h4 className={style.sub_total}>
               <span>Sub Total:</span>
-              <span className={style.price}>${subTotalPrice()}</span>
+              <span className={style.price}>${getSubtotalPrice()}</span>
             </h4>
             <h4 className={style.sub_total}>
               <span>Shipping</span>
@@ -168,12 +139,10 @@ export const Cart: FC = () => {
             </h4>
             <h4 className={style.sub_total}>
               <span>Grand Total:</span>
-              <span className={style.price}>${subTotalPrice()}</span>
+              <span className={style.price}>${getSubtotalPrice()}</span>
             </h4>
           </div>
-          <button className={style.button_checkout} onClick={handlePayment}>
-            PROCEED TO CHECKOUT
-          </button>
+          <PaymentButton cart={cart} />
         </div>
       </div>
     </>
