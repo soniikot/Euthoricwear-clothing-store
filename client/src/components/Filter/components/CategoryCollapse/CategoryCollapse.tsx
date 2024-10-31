@@ -1,6 +1,8 @@
 import { Collapse, useTheme } from '@mui/material';
 import { useMediaQuery } from '@mui/material';
 import { useState } from 'react';
+import { FC } from 'react';
+import { Button } from '@mui/material';
 import style from './styles.module.scss';
 import { CATEGORIES } from '../../constants';
 import clsx from 'clsx';
@@ -9,8 +11,6 @@ import { useAppSelector } from '@/app/hooks';
 import { RootState } from '@/app/store';
 import { setCategory } from '@/features/filter/filterSlice';
 import linkArrow from '@/assets/link-arrow.svg';
-import { FC } from 'react';
-import { Button } from '@mui/material';
 
 export const CategoryCollapse: FC = () => {
   const [openCategory, setOpenCategory] = useState(false);
