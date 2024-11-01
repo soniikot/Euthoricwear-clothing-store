@@ -49,9 +49,8 @@
 }
 
 .reset {
-  background-color: white;
-  border: 1px solid black;
-  margin: 20px 85px;
+  margin-inline: 60px;
+  padding: 5px 0;
 }
 
 @media (max-width: $medium) {

@@ -71,7 +71,7 @@ export const Products: FC<ProductsTypeProps> = ({
           </div>
         </div>
       )}
-      ;
+      
     </>
   );
 };

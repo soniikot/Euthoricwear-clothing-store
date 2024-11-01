@@ -22,9 +22,11 @@ export const Filter: FC = () => {
           <p>Filter</p>
           <img className={style.filterImage} src={filterIcon} alt="filter" />
         </div>
-        <button className={style.reset} onClick={handleResetFilter}>
+        <div className={style.reset}>
+        <button className={style.button} onClick={handleResetFilter}>
           Reset All Filters
         </button>
+        </div>
       </div>
 
       <div>

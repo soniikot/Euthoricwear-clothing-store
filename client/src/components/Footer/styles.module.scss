@@ -3,7 +3,6 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 40px;
-
   background-color: $--dark-grey-text-color;
   padding: 60px 90px;
   font-size: 18px;
@@ -31,9 +30,6 @@
   padding: 0px 170px 30px 90px;
 }
 
-.apps {
-  display: flex;
-}
 
 .title {
   padding: 40px 90px;
@@ -46,14 +42,6 @@
   padding-bottom: 40px;
 }
 
-.app_container {
-  position: relative;
-}
-
-.app_title {
-  position: absolute;
-  top: -55px;
-}
 
 @media (max-width: $small) {
   .social_media {
