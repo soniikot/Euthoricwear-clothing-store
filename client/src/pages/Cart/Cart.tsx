@@ -59,7 +59,13 @@ export const Cart: FC = () => {
         </div>
       </div>
 
-      <div className={style.container}>
+      
+        {cart.length === 0 && (
+          <EmptyList text="You haven't chose anything yet" />
+        )}
+        {cart.length > 0 &&(
+           <div>
+        <div className={style.container}>
         <div className={clsx(style.grid_row_header, 'container')}>
           <div className={style.header_text}>PRODUCT DETAILS</div>
           <div className={style.header_text}>PRICE</div>
@@ -68,10 +74,9 @@ export const Cart: FC = () => {
           <div className={style.header_text}>SUBTOTAL</div>
           <div className={style.header_text}>ACTION</div>
         </div>
-        {cart.length === 0 && (
-          <EmptyList text="You haven't chose anything yet" />
-        )}
-        {cart.length > 0 &&
+        </div>
+        </div>)}
+         {cart.length > 0 &&
           cart.map((product) => (
             <div key={product.id} className={clsx(style.grid_row, 'container')}>
               <div className={style.description}>
@@ -107,7 +112,7 @@ export const Cart: FC = () => {
               </div>
             </div>
           ))}
-      </div>
+     
 
       <div className={clsx(style.bottom, 'container')}>
         <div className={style.discount_wrapper}>

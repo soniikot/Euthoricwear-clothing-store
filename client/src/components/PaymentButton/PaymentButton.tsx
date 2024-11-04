@@ -29,6 +29,8 @@ export const PaymentButton: FC<PaymentButtonProps> = ({ cart }) => {
     }
   };
 
+ 
+
   return (
     <button className={style.button_checkout} onClick={handlePayment}>
       PROCEED TO CHECKOUT

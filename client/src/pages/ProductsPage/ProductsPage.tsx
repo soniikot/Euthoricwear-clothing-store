@@ -22,8 +22,8 @@ export const ProductsPage: FC = () => {
           Explore Clothing Collection Online at Euphoria
         </h4>
         <p>
-          Clothing – Are you searching for the best website to buy Clothing for
-          men and women online in India? Well, your search for the coolest and
+          Clothing – Are you searching for the best website to buy. Clothing for
+          men and women online? Well, your search for the coolest and
           most stylish men and women clothing ends here. From trendy Casual men
           and women Wear Online shopping to premium quality cotton apparel,
           Euphoria has closet of men and women Collection covered with the
@@ -51,7 +51,7 @@ export const ProductsPage: FC = () => {
           Wear. It is quite evident to say that there are very few men and women
           Clothing online stores where you can buy Western Wear for men and
           women comprising the premium material and elegant design that you are
-          always seeking for. Basically,
+          always seeking for. 
         </p>
         <h4 className={style.subheader}>See More</h4>
         <SectionTitle text="Buy men and women's Clothing at Best Price" />
