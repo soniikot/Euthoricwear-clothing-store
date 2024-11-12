@@ -17,7 +17,6 @@ export const Search: FC = () => {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch(setSearch(event.target.value));
-    
     navigate(`/products?search=${searchQuery}`);
   };
 

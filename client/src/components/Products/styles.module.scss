@@ -30,20 +30,17 @@
 .price {
   background-color: $--background-grey-color;
   width: fit-content;
-  padding-inline: 10px;
-  border-radius: 10px;
+  border-radius: 7px;
 }
 
 .text_wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   margin: 10px 0;
   height: 2em;
 }
 
 .card {
   max-width: 280px;
+  margin-bottom: 60px;
 }
 
 @media (max-width: $medium) {
