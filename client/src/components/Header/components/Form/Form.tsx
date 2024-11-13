@@ -1,6 +1,7 @@
 import style from './styles.module.scss';
 import heart from '@/assets/heart.svg';
-import user from '@/assets/user.svg';
+import userWhite from '@/assets/user-white.svg';
+import userGrey from '@/assets/user-grey.svg';
 import shoppingCart from '@/assets/shopping-cart.svg';
 import shoppingCartWhite from '@/assets/shopping-cart-white.svg';
 import { IconButton } from '@/shared/components/IconButton/IconButton';
@@ -10,16 +11,22 @@ import { Link, useLocation } from 'react-router-dom';
 export const Form: FC = () => {
   const location = useLocation();
 
-  const isActive = location.pathname === '/cart';
+  const isActiveCart = location.pathname === '/cart';
+  const isActiveLogin = location.pathname === '/login';
 
   return (
     <div className={style.form}>
       <IconButton icon={heart} />
-      <IconButton icon={user} />
+      <Link to="/login">
+        <IconButton
+          icon={isActiveLogin ? userWhite : userGrey}
+          isActive={isActiveLogin}
+        />
+      </Link>
       <Link to="/cart">
         <IconButton
-          icon={isActive ? shoppingCartWhite : shoppingCart}
-          isActive={isActive}
+          icon={isActiveCart ? shoppingCartWhite : shoppingCart}
+          isActive={isActiveCart}
         />
       </Link>
     </div>
