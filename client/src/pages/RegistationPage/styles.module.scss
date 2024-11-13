@@ -1,0 +1,23 @@
+.form_wrapper {
+  margin-top: 55px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-self: center;
+  align-items: center;
+
+  flex-basis: 50%;
+}
+
+.image_wrapper {
+  flex-basis: 50%;
+}
+
+.image_wrapper img {
+  width: 100%;
+}
+
+.wrapper {
+  display: flex;
+  gap: 10px;
+}

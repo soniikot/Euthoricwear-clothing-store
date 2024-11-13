@@ -7,6 +7,8 @@ import { Layout } from './Layout';
 import { Cart } from '@/pages/Cart/Cart';
 import ScrollToTop from '@/helpers/ScrollToTop';
 import { LoginPage } from '@/pages/LoginPage/LoginPage';
+import RegistrationPage from '@/pages/RegistationPage/RegistationPage';
+
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -61,6 +63,14 @@ export const router = createBrowserRouter([
         element: (
           <ScrollToTop>
             <LoginPage />
+          </ScrollToTop>
+        ),
+      },
+      {
+        path: '/sign-in/',
+        element: (
+          <ScrollToTop>
+            <RegistrationPage />
           </ScrollToTop>
         ),
       },
