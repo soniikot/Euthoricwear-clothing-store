@@ -1,7 +1,7 @@
 import { Collapse, useTheme } from '@mui/material';
 import { useMediaQuery } from '@mui/material';
 import { useState } from 'react';
-import { FC } from 'react';
+import { FC, ChangeEvent } from 'react';
 import style from './styles.module.scss';
 import { useAppDispatch } from '@/app/hooks';
 import { useAppSelector } from '@/app/hooks';
@@ -30,10 +30,14 @@ export const PriceCollapse: FC = () => {
 
   const handleInputChange = (
     index: number,
-    event: React.ChangeEvent<HTMLInputElement>
+    event: ChangeEvent<HTMLInputElement>
   ) => {
-    const newValue = [...priceRange];
-    newValue[index] = Number(event.target.value);
+    let newValue = [...priceRange];
+
+    const inputValue =
+      event.target.value === '' ? 0 : Number(event.target.value);
+
+    newValue[index] = inputValue;
 
     if (newValue[0] <= newValue[1]) {
       dispatch(setPriceRange(newValue));
@@ -69,12 +73,12 @@ export const PriceCollapse: FC = () => {
                 max={priceRange[1]}
               />
               <input
+                className={style.button}
                 type="number"
                 value={priceRange[1]}
                 onChange={(event) => handleInputChange(1, event)}
                 min={priceRange[0]}
                 max={200}
-                className={style.button}
               />
             </div>
           </div>
