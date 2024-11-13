@@ -8,10 +8,11 @@
 }
 
 .header {
-  padding: 20px 20px;
+  padding: 20px 20px 20px 10px;
   display: flex;
   justify-content: space-between;
   color: $--grey-text-color;
+  cursor: pointer;
 }
 
 .categories {
@@ -23,18 +24,6 @@
   display: flex;
   justify-content: space-between;
   margin: 13px 20px;
-}
-
-.slider {
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-  margin-bottom: 20px;
-}
-
-.range {
-  display: flex;
-  justify-content: space-between;
 }
 
 .button {

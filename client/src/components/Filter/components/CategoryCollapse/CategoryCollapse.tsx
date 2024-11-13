@@ -11,9 +11,11 @@ import { useAppSelector } from '@/app/hooks';
 import { RootState } from '@/app/store';
 import { setCategory } from '@/features/filter/filterSlice';
 import linkArrow from '@/assets/link-arrow.svg';
+import linkArrowUp from '@/assets/arrow-up.svg';
+import linkArrowDown from '@/assets/arrow-Down.svg';
 
 export const CategoryCollapse: FC = () => {
-  const [openCategory, setOpenCategory] = useState(false);
+  const [openCategory, setOpenCategory] = useState(true);
   const dispatch = useAppDispatch();
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -27,12 +29,16 @@ export const CategoryCollapse: FC = () => {
   );
   return (
     <>
-      <Button
+      <div
         className={style.header}
         onClick={() => setOpenCategory(!openCategory)}
       >
-        Categories
-      </Button>
+        <h4>Categories</h4>
+        <img
+          src={openCategory ? linkArrowUp : linkArrowDown}
+          alt="toggle arrow"
+        />
+      </div>
       <Collapse
         in={openCategory}
         style={
