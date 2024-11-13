@@ -57,13 +57,13 @@ export const Products: FC<ProductsTypeProps> = ({
                     >
                       {product.attributes.disc}
                     </p>
-                  </div>
-                  <div
-                    className={clsx(style.price, {
-                      [style.product_page_price]: isProductPage,
-                    })}
-                  >
-                    ${product.attributes.price}
+                    <div
+                      className={clsx(style.price, {
+                        [style.product_page_price]: isProductPage,
+                      })}
+                    >
+                      ${product.attributes.price}
+                    </div>
                   </div>
                 </div>
               </Link>
@@ -71,7 +71,6 @@ export const Products: FC<ProductsTypeProps> = ({
           </div>
         </div>
       )}
-      ;
     </>
   );
 };

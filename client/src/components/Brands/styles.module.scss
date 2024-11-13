@@ -22,6 +22,7 @@
 .brands_container {
   padding-top: 65px;
   display: flex;
+  gap:15px;
   justify-content: center;
   padding-bottom: 65px;
 }
@@ -33,5 +34,8 @@
 @media (max-width: $small) {
   .brands_container img {
     width: 60px;
+  }
+  .brands_container{
+    gap:5px;
   }
 }

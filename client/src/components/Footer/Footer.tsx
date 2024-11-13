@@ -1,9 +1,7 @@
 import style from './styles.module.scss';
 import socialMedia from '@/assets/social_media.png';
-import google from '@/assets/google.png';
-import app_store from '@/assets/appstore.png';
-import clsx from 'clsx';
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 export const Footer: FC = () => {
   return (
@@ -25,7 +23,7 @@ export const Footer: FC = () => {
             <li>
               <span className={style.bold}>Company</span>
             </li>
-            <li>About Us</li>
+            <Link to='/about/'><li>About Us</li></Link>
             <li>Euphoria Blog</li>
             <li>Euphoriastan</li>
             <li>Collaboration</li>
@@ -46,27 +44,20 @@ export const Footer: FC = () => {
             <li>
               <span className={style.bold}>Location</span>
             </li>
-            <li>support@euphoria.in</li>
-            <li>Eklingpura Chouraha, Ahmedabad Main Road</li>
-            <li>NH 8- Near Mahadev Hotel, Udaipur, India- 313002</li>
+            <li>support@euphoria.Company</li>
+            <li>345, Union St, San-Francisco</li>
           </ul>
         </div>
         <div className={style.social_media}>
           <img className={style.icons} src={socialMedia} alt="social media" />
           <div className={style.app_container}>
-            <span className={clsx(style.bold, style.app_title)}>
-              Download The App
-            </span>
-            <div className={style.apps}>
-              <img src={google} alt="google" />
-              <img src={app_store} alt="AppStore" />
-            </div>
+        
           </div>
         </div>
 
         <h3 className={style.title}>Popular Categories</h3>
         <p className={style.text}>
-          Copyright © 2023 Euphoria Folks Pvt Ltd. All rights reserved.
+          Copyright © 2024 Euphoria Folks Pvt Ltd. All rights reserved.
         </p>
       </div>
     </div>

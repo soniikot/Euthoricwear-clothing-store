@@ -2,7 +2,7 @@ import { NavigationBar } from './components/NavigationBar/NavigationBar';
 import style from './styles.module.scss';
 import { PlusMinusButton } from './components/PlusMinusButton/PlusMinusButton';
 import iconDelete from '@/assets/deleteicon.svg';
-import { TextButton } from '@/shared/components/TextButton/TextButton';
+import { TextButtonWithLink } from '@/shared/components/TextButtonWithLink/TextButtonWithLink';
 import clsx from 'clsx';
 import { useAppSelector } from '@/app/hooks';
 import { RootState } from '@/app/store';
@@ -59,55 +59,57 @@ export const Cart: FC = () => {
         </div>
       </div>
 
-      <div className={style.container}>
-        <div className={clsx(style.grid_row_header, 'container')}>
-          <div className={style.header_text}>PRODUCT DETAILS</div>
-          <div className={style.header_text}>PRICE</div>
-          <div className={style.header_text}>QUANTITY</div>
-          <div className={style.header_text}>SHIPPING</div>
-          <div className={style.header_text}>SUBTOTAL</div>
-          <div className={style.header_text}>ACTION</div>
+      {cart.length === 0 && <EmptyList text="You haven't chose anything yet" />}
+      {cart.length > 0 && (
+        <div>
+          <div className={style.container}>
+            <div className={clsx(style.grid_row_header, 'container')}>
+              <div className={style.header_text}>PRODUCT DETAILS</div>
+              <div className={style.header_text}>PRICE</div>
+              <div className={style.header_text}>QUANTITY</div>
+              <div className={style.header_text}>SHIPPING</div>
+              <div className={style.header_text}>SUBTOTAL</div>
+              <div className={style.header_text}>ACTION</div>
+            </div>
+          </div>
         </div>
-        {cart.length === 0 && (
-          <EmptyList text="You haven't chose anything yet" />
-        )}
-        {cart.length > 0 &&
-          cart.map((product) => (
-            <div key={product.id} className={clsx(style.grid_row, 'container')}>
-              <div className={style.description}>
-                <div className={style.image_container}>
-                  <img
-                    className={style.image}
-                    src={import.meta.env.VITE_API_UPLOAD_URL + product.img}
-                    alt="clothes"
-                  />
-                </div>
-                <div className={style.description_text}>
-                  <h5 className={style.product_title}>{product.title}</h5>
-                  <p className={style.small_gray}>Color:{product.color} </p>
-                  <p className={style.small_gray}>Size:{product.size} </p>
-                </div>
+      )}
+      {cart.length > 0 &&
+        cart.map((product) => (
+          <div key={product.id} className={clsx(style.grid_row, 'container')}>
+            <div className={style.description}>
+              <div className={style.image_container}>
+                <img
+                  className={style.image}
+                  src={import.meta.env.VITE_API_UPLOAD_URL + product.img}
+                  alt="clothes"
+                />
               </div>
-              <div className={style.price}>${product.price}</div>
-              <div className={style.quantity}>
-                <PlusMinusButton id={product.id} count={product.quantity} />
-              </div>
-              <div className={style.shipping}>FREE</div>
-              <div className={style.subtotal}>
-                ${product.quantity * product.price}
-              </div>
-              <div className={style.action}>
-                <button
-                  onClick={() => {
-                    handleDeleteItem(product.id);
-                  }}
-                >
-                  <img src={iconDelete} alt="delete" />
-                </button>
+              <div className={style.description_text}>
+                <h5 className={style.product_title}>{product.title}</h5>
+                <p className={style.small_gray}>Color:{product.color} </p>
+                <p className={style.small_gray}>Size:{product.size} </p>
               </div>
             </div>
-          ))}
-      </div>
+            <div className={style.price}>${product.price}</div>
+            <div className={style.quantity}>
+              <PlusMinusButton id={product.id} count={product.quantity} />
+            </div>
+            <div className={style.shipping}>FREE</div>
+            <div className={style.subtotal}>
+              ${product.quantity * product.price}
+            </div>
+            <div className={style.action}>
+              <button
+                onClick={() => {
+                  handleDeleteItem(product.id);
+                }}
+              >
+                <img src={iconDelete} alt="delete" />
+              </button>
+            </div>
+          </div>
+        ))}
 
       <div className={clsx(style.bottom, 'container')}>
         <div className={style.discount_wrapper}>
@@ -121,7 +123,7 @@ export const Cart: FC = () => {
               value="Apply Coupon"
             />
           </form>
-          <TextButton
+          <TextButtonWithLink
             text="Continue Shopping"
             buttonColor="white"
             link="/products/"

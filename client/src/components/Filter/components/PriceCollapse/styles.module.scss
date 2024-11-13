@@ -8,10 +8,11 @@
 }
 
 .header {
-  padding: 20px 20px;
+  padding: 20px 20px 20px 10px;
   display: flex;
   justify-content: space-between;
   color: $--grey-text-color;
+  cursor: pointer;
 }
 
 .categories {
@@ -28,7 +29,7 @@
 .slider {
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+  margin-inline: 10px;
   margin-bottom: 20px;
 }
 
@@ -41,7 +42,7 @@
   background-color: white;
   border-radius: 8px;
   border: 1px solid $--grey-border-color;
-  padding: 3px 30px;
+  padding: 3px 10px;
 }
 
 .subcategory.active {
@@ -68,43 +69,4 @@
     font-size: 10px;
     margin: 5px 45px;
   }
-}
-
-@media (max-width: $small) {
-  .wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100vw;
-    border: none;
-    margin: 0px;
-    font-size: 10px;
-  }
-
-  .header {
-    padding: 5px;
-    font-size: 12px;
-  }
-
-  .categories {
-    font-size: 12px;
-  }
-  .reset {
-    font-size: 10px;
-    width: 80px;
-    align-self: center;
-    margin: 10px;
-  }
-
-  .filterImage {
-    display: none;
-  }
-
-  .filter_header {
-    display: flex;
-    max-width: 200px;
-  }
-}
-
-.collapse_wrapper {
-  position: relative;
 }

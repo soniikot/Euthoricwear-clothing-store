@@ -1,5 +1,5 @@
 import style from './styles.module.scss';
-import { TextButton } from '../../shared/components/TextButton/TextButton.tsx';
+import { TextButtonWithLink } from '../../shared/components/TextButtonWithLink/TextButtonWithLink.tsx';
 import { FC } from 'react';
 
 export const Hero: FC = () => {
@@ -12,7 +12,7 @@ export const Hero: FC = () => {
             <h1 className={style.title}>Summer Value Pack</h1>
             <h3>cool / colorful / comfy</h3>
             <div className={style.button}>
-              <TextButton
+              <TextButtonWithLink
                 text="Shop Now"
                 buttonColor="white"
                 link="/products/"

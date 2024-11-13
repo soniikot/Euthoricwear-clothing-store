@@ -30,20 +30,17 @@
 .price {
   background-color: $--background-grey-color;
   width: fit-content;
-  padding-inline: 10px;
-  border-radius: 10px;
+  border-radius: 7px;
 }
 
 .text_wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   margin: 10px 0;
   height: 2em;
 }
 
 .card {
   max-width: 280px;
+  margin-bottom: 60px;
 }
 
 @media (max-width: $medium) {
@@ -52,9 +49,9 @@
     place-items: center;
   }
 
-  .productPageImg {
-    width: 200px;
-    height: 280px;
+  .product_page_img {
+    width: 150px;
+    height: 200px;
     object-fit: cover;
     border-radius: 5px;
   }
@@ -75,6 +72,8 @@
 @media (max-width: $small) {
   .wrapper {
     grid-template-columns: repeat(1, 1fr);
+    column-gap: 10px;
+    row-gap: 10px;
   }
 
   .product_page_wrapper {
@@ -98,5 +97,11 @@
 
   .product_page_price {
     font-size: 10px;
+  }
+
+  .card {
+    margin-bottom: 60px;
+    column-gap: 00px;
+    row-gap: 10px;
   }
 }

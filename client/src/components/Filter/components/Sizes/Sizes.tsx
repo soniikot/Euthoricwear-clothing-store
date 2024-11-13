@@ -8,11 +8,12 @@ import clsx from 'clsx';
 import { Collapse, useTheme } from '@mui/material';
 import { useMediaQuery } from '@mui/material';
 import { useState } from 'react';
-import { Button } from '@mui/material';
+import linkArrowUp from '@/assets/arrow-up.svg';
+import linkArrowDown from '@/assets/arrow-Down.svg';
 
 export const Sizes: FC = () => {
   const dispatch = useAppDispatch();
-  const [openSize, setOpenSize] = useState(false);
+  const [openSize, setOpenSize] = useState(true);
 
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
@@ -25,16 +26,13 @@ export const Sizes: FC = () => {
 
   return (
     <>
-      <Button className={style.header} onClick={() => setOpenSize(!openSize)}>
-        Size
-      </Button>
+      <div className={style.header} onClick={() => setOpenSize(!openSize)}>
+        <h4>Size</h4>
+        <img src={openSize ? linkArrowUp : linkArrowDown} alt="toggle arrow" />
+      </div>
       <Collapse
         in={openSize}
-        style={
-          isSmallScreen
-            ? { position: 'absolute', zIndex: 10, backgroundColor: 'white' }
-            : {}
-        }
+        style={isSmallScreen ? { backgroundColor: 'white' } : {}}
       >
         <div className={style.wrapper}>
           <button
