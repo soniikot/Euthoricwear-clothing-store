@@ -2,7 +2,7 @@ import { Collapse, useTheme } from '@mui/material';
 import { useMediaQuery } from '@mui/material';
 import { useState } from 'react';
 import { FC } from 'react';
-import { Button } from '@mui/material';
+
 import style from './styles.module.scss';
 import { CATEGORIES } from '../../constants';
 import clsx from 'clsx';
@@ -41,11 +41,7 @@ export const CategoryCollapse: FC = () => {
       </div>
       <Collapse
         in={openCategory}
-        style={
-          isSmallScreen
-            ? { position: 'absolute', zIndex: 10, backgroundColor: 'white' }
-            : {}
-        }
+        style={isSmallScreen ? { zIndex: 10, backgroundColor: 'white' } : {}}
       >
         <div className={style.categories}>
           <ul className={style.subcategory_wrapper}>

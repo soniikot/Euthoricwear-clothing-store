@@ -32,11 +32,7 @@ export const Sizes: FC = () => {
       </div>
       <Collapse
         in={openSize}
-        style={
-          isSmallScreen
-            ? { position: 'absolute', zIndex: 10, backgroundColor: 'white' }
-            : {}
-        }
+        style={isSmallScreen ? { backgroundColor: 'white' } : {}}
       >
         <div className={style.wrapper}>
           <button

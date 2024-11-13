@@ -48,11 +48,7 @@ export const PriceCollapse: FC = () => {
       </div>
       <Collapse
         in={openPrice}
-        style={
-          isSmallScreen
-            ? { position: 'absolute', zIndex: 10, backgroundColor: 'white' }
-            : {}
-        }
+        style={isSmallScreen ? { backgroundColor: 'white' } : {}}
       >
         <div className={style.slider}>
           <div style={{ width: '225px', padding: '5px' }}>
@@ -64,21 +60,20 @@ export const PriceCollapse: FC = () => {
               max={200}
             />
             <div className={style.range}>
-              {/* Use input fields instead of buttons */}
               <input
                 className={style.button}
                 type="number"
                 value={priceRange[0]}
                 onChange={(event) => handleInputChange(0, event)}
                 min={0}
-                max={priceRange[1]} // Max limit should be the second value
+                max={priceRange[1]}
               />
               <input
                 type="number"
                 value={priceRange[1]}
                 onChange={(event) => handleInputChange(1, event)}
-                min={priceRange[0]} // Min limit should be the first value
-                max={200} // Max limit can be set to a fixed value
+                min={priceRange[0]}
+                max={200}
                 className={style.button}
               />
             </div>

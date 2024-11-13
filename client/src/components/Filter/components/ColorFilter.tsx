@@ -37,11 +37,7 @@ export const ColorFilter: FC = () => {
       </div>
       <Collapse
         in={openColors}
-        style={
-          isSmallScreen
-            ? { position: 'absolute', zIndex: 10, backgroundColor: 'white' }
-            : {}
-        }
+        style={isSmallScreen ? { backgroundColor: 'white' } : {}}
       >
         <div className={style.wrapper}>
           {COLORS.map((color) => (

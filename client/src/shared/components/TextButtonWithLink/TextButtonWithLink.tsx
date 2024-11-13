@@ -1,21 +1,29 @@
 import style from './styles.module.scss';
 import clsx from 'clsx';
-import { FC, MouseEvent } from 'react';
+import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export interface TextButtonProps {
   text: string;
   buttonColor: 'purple' | 'white';
-  onClick?: (event: MouseEvent) => void;
+  link?: string;
 }
 
-export const TextButton: FC<TextButtonProps> = ({
+export const TextButtonWithLink: FC<TextButtonProps> = ({
   text,
   buttonColor,
-  onClick,
+  link,
 }) => {
+  const navigate = useNavigate();
+  const handleClick = () => {
+    if (link) {
+      navigate(link);
+    }
+  };
+
   return (
     <button
-      onClick={onClick}
+      onClick={handleClick}
       className={clsx(style.button, {
         [style.purple]: buttonColor === 'purple',
         [style.white]: buttonColor === 'white',
