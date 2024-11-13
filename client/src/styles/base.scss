@@ -20,7 +20,6 @@ input[type='number'] {
   -moz-appearance: textfield;
 }
 
-/* Optional: Remove focus outline */
-input[type='number']:focus {
-  outline: none;
+* {
+  outline: 1px solid black;
 }

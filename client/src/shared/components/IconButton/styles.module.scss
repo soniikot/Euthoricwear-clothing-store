@@ -11,3 +11,9 @@
   background-color: $--purple-color;
   color: white;
 }
+
+@media (max-width: $small) {
+  .button {
+    padding: 5px;
+  }
+}

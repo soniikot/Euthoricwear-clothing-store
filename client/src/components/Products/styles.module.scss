@@ -49,9 +49,9 @@
     place-items: center;
   }
 
-  .productPageImg {
-    width: 200px;
-    height: 280px;
+  .product_page_img {
+    width: 150px;
+    height: 200px;
     object-fit: cover;
     border-radius: 5px;
   }
@@ -72,6 +72,8 @@
 @media (max-width: $small) {
   .wrapper {
     grid-template-columns: repeat(1, 1fr);
+    column-gap: 10px;
+    row-gap: 10px;
   }
 
   .product_page_wrapper {
@@ -79,8 +81,8 @@
   }
 
   .product_page_img {
-    width: 150px;
-    height: 200px;
+    width: 100px;
+    height: 150px;
     object-fit: cover;
     border-radius: 5px;
   }
@@ -95,5 +97,11 @@
 
   .product_page_price {
     font-size: 10px;
+  }
+
+  .card {
+    margin-bottom: 60px;
+    column-gap: 00px;
+    row-gap: 10px;
   }
 }

@@ -71,39 +71,6 @@
 
 @media (max-width: $small) {
   .wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    width: 100vw;
-    border: none;
-    margin: 0px;
-    font-size: 10px;
-  }
-
-  .header {
-    padding: 5px;
-    font-size: 12px;
-  }
-
-  .categories {
-    font-size: 12px;
-  }
-  .reset {
-    font-size: 10px;
-    width: 80px;
-    align-self: center;
-    margin: 10px;
-  }
-
-  .filterImage {
     display: none;
   }
-
-  .filter_header {
-    display: flex;
-    max-width: 200px;
-  }
-}
-
-.collapse_wrapper {
-  position: relative;
 }
