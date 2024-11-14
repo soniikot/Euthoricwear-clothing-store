@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 .form_wrapper {
   margin-top: 55px;
   display: flex;
@@ -29,4 +31,14 @@
   align-self: center;
   align-items: center;
   flex-basis: 50%;
+}
+
+@media (max-width: $small) {
+  .image_wrapper {
+    display: none;
+  }
+
+  .wrapper {
+    display: block;
+  }
 }

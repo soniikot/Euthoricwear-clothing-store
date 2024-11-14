@@ -13,7 +13,6 @@ export const LoginPage: FC = () => {
   const [message, setMessage] = useState<string>('');
   const [formVisible, setFormVisible] = useState(true);
 
-  // Access the username from the Redux store
   const username = useAppSelector((state: RootState) => state.user.username);
 
   const dispatch = useAppDispatch();
@@ -64,7 +63,8 @@ export const LoginPage: FC = () => {
 
         {username ? (
           <div className={style.success_message}>
-            <p>You are logged in as {username}</p>
+            <h4>You are logged in as {username}</h4>
+            <p>You haven't order anything yet</p>
             <TextButtonWithLink
               text="Start Shopping"
               buttonColor="purple"
