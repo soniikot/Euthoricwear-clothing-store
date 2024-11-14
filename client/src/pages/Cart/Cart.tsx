@@ -11,7 +11,7 @@ import { removeItem } from '../../features/cart/cartSlice';
 import { FC } from 'react';
 import { EmptyList } from '@/components/EmptyList/EmptyList';
 import { PaymentButton } from '@/components/PaymentButton/PaymentButton';
-
+import { Link } from 'react-router-dom';
 export interface CartData {
   id: number;
   title: string;
@@ -53,7 +53,11 @@ export const Cart: FC = () => {
           <p className={style.grey}>
             Already registered?
             <a href="" className="purple">
-              <span className="purple">Please login here</span>
+              <span className="purple">
+                <Link to="/login" style={{ cursor: 'pointer' }}>
+                  Please login here
+                </Link>
+              </span>
             </a>
           </p>
         </div>
