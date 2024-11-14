@@ -6,6 +6,7 @@ export interface TextButtonProps {
   text: string;
   buttonColor: 'purple' | 'white';
   onClick?: (event: MouseEvent) => void;
+  type?: string;
 }
 
 export const TextButton: FC<TextButtonProps> = ({

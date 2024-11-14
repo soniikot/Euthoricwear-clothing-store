@@ -4,6 +4,7 @@ import cartReducer from '../features/cart/cartSlice';
 import categoryReducer from '../features/categories/categoriesSlice';
 import searchReducer from '../features/Search/SearchSlice';
 import filterReducer from '../features/filter/filterSlice';
+import useReducer from '../features/user/userSlice';
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     categories: categoryReducer,
     search: searchReducer,
     filter: filterReducer,
+    user: useReducer,
   },
 });
 

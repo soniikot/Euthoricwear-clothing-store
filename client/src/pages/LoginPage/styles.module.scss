@@ -21,3 +21,13 @@
   display: flex;
   gap: 10px;
 }
+
+.success_message {
+  margin-top: 55px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-self: center;
+  align-items: center;
+  flex-basis: 50%;
+}
