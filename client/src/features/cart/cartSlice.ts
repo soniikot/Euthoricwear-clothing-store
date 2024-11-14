@@ -3,9 +3,11 @@ import { CartData } from '@/pages/Cart/Cart';
 
 interface CartState {
   cart: CartData[];
+  discountAmount: number;
 }
 const initialState: CartState = {
   cart: [],
+  discountAmount: 0,
 };
 
 export const cartSlice = createSlice({
@@ -44,10 +46,19 @@ export const cartSlice = createSlice({
     removeItem: (state, action) => {
       state.cart = state.cart.filter((item) => item.id !== action.payload);
     },
+    applyDiscount: (state, action) => {
+      state.cart = action.payload.cart;
+      state.discountAmount = action.payload.discountAmount;
+    },
   },
 });
 
-export const { addToCart, increaseCount, decreaseCount, removeItem } =
-  cartSlice.actions;
+export const {
+  addToCart,
+  increaseCount,
+  decreaseCount,
+  removeItem,
+  applyDiscount,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;

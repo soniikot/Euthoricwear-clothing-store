@@ -1,4 +1,3 @@
-import { NavigationBar } from './components/NavigationBar/NavigationBar';
 import style from './styles.module.scss';
 import { PlusMinusButton } from './components/PlusMinusButton/PlusMinusButton';
 import iconDelete from '@/assets/deleteicon.svg';
@@ -7,22 +6,27 @@ import clsx from 'clsx';
 import { useAppSelector } from '@/app/hooks';
 import { RootState } from '@/app/store';
 import { useAppDispatch } from '@/app/hooks';
-import { removeItem } from '../../features/cart/cartSlice';
-import { FC } from 'react';
+import { removeItem, applyDiscount } from '../../features/cart/cartSlice';
+import { FC, useState } from 'react';
 import { EmptyList } from '@/components/EmptyList/EmptyList';
 import { PaymentButton } from '@/components/PaymentButton/PaymentButton';
 import { Link } from 'react-router-dom';
+
 export interface CartData {
   id: number;
   title: string;
   price: number;
   img: string;
-  color: string;
+
   size: string;
   quantity: number;
 }
 
 export const Cart: FC = () => {
+  const [couponCode, setCouponCode] = useState('');
+  const [discountApplied, setDiscountApplied] = useState(false);
+  const [message, setMessage] = useState('');
+
   const cart: CartData[] = useAppSelector(
     (state: RootState) => state.cart.cart
   );
@@ -41,10 +45,31 @@ export const Cart: FC = () => {
     return total;
   };
 
+  const handleCouponChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setCouponCode(event.target.value);
+  };
+
+  const handleApplyCoupon = () => {
+    if (couponCode === 'DISCOUNT10') {
+      const discount = 0.1;
+      const discountAmount = getSubtotalPrice() * discount;
+
+      const updatedCart = cart.map((item) => ({
+        ...item,
+        price: item.price * (1 - discount),
+      }));
+
+      dispatch(applyDiscount(updatedCart));
+      setDiscountApplied(true);
+      setMessage('Coupon applied successfully!');
+    } else {
+      setMessage('Invalid coupon code.');
+    }
+  };
+
   return (
     <>
       <div className="container">
-        <NavigationBar />
         <div className={style.text}>
           <p className={style.grey}>
             Please fill in the fields below and click place order to complete
@@ -54,9 +79,7 @@ export const Cart: FC = () => {
             Already registered?
             <a href="" className="purple">
               <span className="purple">
-                <Link to="/login" style={{ cursor: 'pointer' }}>
-                  Please login here
-                </Link>
+                <Link to="/login"> Please login here</Link>
               </span>
             </a>
           </p>
@@ -114,43 +137,53 @@ export const Cart: FC = () => {
             </div>
           </div>
         ))}
+      {cart.length > 0 && (
+        <div className={clsx(style.bottom, 'container')}>
+          <div className={style.discount_wrapper}>
+            <h4>Discount Codes</h4>
+            <p className={style.grey}>Enter your coupon code if you have one</p>
+            <form className={style.form} onSubmit={(e) => e.preventDefault()}>
+              <input
+                type="text"
+                onChange={handleCouponChange}
+                placeholder="Enter coupon code"
+              />
+              <input
+                type="button"
+                className={style.button}
+                value="Apply Coupon"
+                onClick={handleApplyCoupon}
+              />
+            </form>
 
-      <div className={clsx(style.bottom, 'container')}>
-        <div className={style.discount_wrapper}>
-          <h4>Discount Codes</h4>
-          <p className={style.grey}>Enter your coupon code if you have one</p>
-          <form className={style.form} action="">
-            <input type="text" />
-            <input
-              type="button"
-              className={style.button}
-              value="Apply Coupon"
+            {message && <p className={style.message}>{message}</p>}
+
+            <TextButtonWithLink
+              text="Continue Shopping"
+              buttonColor="white"
+              link="/products/"
             />
-          </form>
-          <TextButtonWithLink
-            text="Continue Shopping"
-            buttonColor="white"
-            link="/products/"
-          />
-        </div>
-        <div className={style.total}>
-          <div className={style.text}>
-            <h4 className={style.sub_total}>
-              <span>Sub Total:</span>
-              <span className={style.price}>${getSubtotalPrice()}</span>
-            </h4>
-            <h4 className={style.sub_total}>
-              <span>Shipping</span>
-              <span className={style.price}>Free</span>
-            </h4>
-            <h4 className={style.sub_total}>
-              <span>Grand Total:</span>
-              <span className={style.price}>${getSubtotalPrice()}</span>
-            </h4>
           </div>
-          <PaymentButton cart={cart} />
+
+          <div className={style.total}>
+            <div className={style.text}>
+              <h4 className={style.sub_total}>
+                <span>Sub Total:</span>
+                <span className={style.price}>${getSubtotalPrice()}</span>
+              </h4>
+              <h4 className={style.sub_total}>
+                <span>Shipping</span>
+                <span className={style.price}>Free</span>
+              </h4>
+              <h4 className={style.sub_total}>
+                <span>Grand Total:</span>
+                <span className={style.price}>${getSubtotalPrice()}</span>
+              </h4>
+            </div>
+            <PaymentButton cart={cart} />
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

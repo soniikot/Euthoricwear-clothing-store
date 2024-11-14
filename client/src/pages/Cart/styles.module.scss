@@ -19,6 +19,7 @@
   color: white;
   background-color: $--purple-color;
   border-radius: 0px 10px 10px 0px;
+  cursor: pointer;
 }
 
 .form {
@@ -91,4 +92,9 @@
   object-fit: cover;
   width: 105px;
   height: 120px;
+}
+
+.message {
+  margin: -30px 0 40px 0;
+  color: red;
 }
