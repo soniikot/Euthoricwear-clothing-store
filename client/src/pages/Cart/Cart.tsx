@@ -24,7 +24,7 @@ export interface CartData {
 
 export const Cart: FC = () => {
   const [couponCode, setCouponCode] = useState('');
-  const [discountApplied, setDiscountApplied] = useState(false);
+  const [_discountApplied, setDiscountApplied] = useState(false);
   const [message, setMessage] = useState('');
 
   const cart: CartData[] = useAppSelector(
@@ -52,7 +52,6 @@ export const Cart: FC = () => {
   const handleApplyCoupon = () => {
     if (couponCode === 'DISCOUNT10') {
       const discount = 0.1;
-      const discountAmount = getSubtotalPrice() * discount;
 
       const updatedCart = cart.map((item) => ({
         ...item,

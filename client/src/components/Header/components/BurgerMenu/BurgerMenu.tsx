@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setGender } from '@/features/filter/filterSlice';
 import { type MouseEvent } from 'react';
+import MenuIcon from '@mui/icons-material/Menu';
 
 export function BurgerMenu() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -37,7 +38,14 @@ export function BurgerMenu() {
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        Menu
+        <MenuIcon
+          sx={{
+            color: 'rgba(138, 51, 253, 1)',
+            '&:hover': {
+              backgroundColor: 'rgba(128, 0, 128, 0.1)',
+            },
+          }}
+        />
       </Button>
       <Menu
         id="basic-menu"

@@ -27,5 +27,6 @@
 @media (max-width: $small) {
   .header {
     gap: 4%;
+    justify-content: space-between;
   }
 }
