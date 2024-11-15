@@ -50,11 +50,15 @@ export function BurgerMenu() {
       <Menu
         id="basic-menu"
         anchorEl={anchorEl}
-        color="secondary"
         open={open}
         onClose={handleClose}
         MenuListProps={{
           'aria-labelledby': 'basic-button',
+        }}
+        sx={{
+          '& .MuiPaper-root': {
+            marginLeft: '-15px', // Move the menu 10px to the left
+          },
         }}
       >
         <MenuItem onClick={handleClose}>
