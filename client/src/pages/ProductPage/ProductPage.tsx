@@ -19,7 +19,7 @@ export const ProductPage = () => {
   const [selectedImg, setSelectedImg] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    if (!products) {
+    if (!products || products.length === 0) {
       return;
     }
     const initialImage =
