@@ -11,13 +11,14 @@ import { PaymentButton } from '@/components/PaymentButton/PaymentButton';
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from '@mui/material';
 import { DesktopCartItem } from '@/components/DesktopCartItem/DesktopCartItem';
+import { MobileCartItem } from '@/components/MobileCartItem/MobileCartItem';
 
 export interface CartData {
   id: number;
   title: string;
   price: number;
   img: string;
-
+  color: string;
   size: string;
   quantity: number;
 }
@@ -44,6 +45,8 @@ export const Cart: FC = () => {
     });
     return total;
   };
+
+  const isMobile = useMediaQuery('(max-width: 500px)');
 
   const handleCouponChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setCouponCode(event.target.value);
@@ -102,7 +105,12 @@ export const Cart: FC = () => {
             </div>
           </div>
         )}
-        <DesktopCartItem cart={cart} handleDeleteItem={handleDeleteItem} />
+        {isMobile ? (
+          <MobileCartItem cart={cart} handleDeleteItem={handleDeleteItem} />
+        ) : (
+          <DesktopCartItem cart={cart} handleDeleteItem={handleDeleteItem} />
+        )}
+
         {cart.length > 0 && (
           <div className={clsx(style.bottom, 'container')}>
             <div className={style.discount_wrapper}>
