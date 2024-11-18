@@ -1,6 +1,4 @@
 import style from './styles.module.scss';
-import { PlusMinusButton } from './components/PlusMinusButton/PlusMinusButton';
-import iconDelete from '@/assets/deleteicon.svg';
 import { TextButtonWithLink } from '@/shared/components/TextButtonWithLink/TextButtonWithLink';
 import clsx from 'clsx';
 import { useAppSelector } from '@/app/hooks';
@@ -11,6 +9,8 @@ import { FC, useState } from 'react';
 import { EmptyList } from '@/components/EmptyList/EmptyList';
 import { PaymentButton } from '@/components/PaymentButton/PaymentButton';
 import { Link } from 'react-router-dom';
+import { useMediaQuery } from '@mui/material';
+import { DesktopCartItem } from '@/components/DesktopCartItem/DesktopCartItem';
 
 export interface CartData {
   id: number;
@@ -102,42 +102,7 @@ export const Cart: FC = () => {
             </div>
           </div>
         )}
-        {cart.length > 0 &&
-          cart.map((product) => (
-            <div key={product.id} className={clsx(style.grid_row, 'container')}>
-              <div className={style.description}>
-                <div className={style.image_container}>
-                  <img
-                    className={style.image}
-                    src={import.meta.env.VITE_API_UPLOAD_URL + product.img}
-                    alt="clothes"
-                  />
-                </div>
-                <div className={style.description_text}>
-                  <h5 className={style.product_title}>{product.title}</h5>
-                  <p className={style.small_gray}>Color:{product.color} </p>
-                  <p className={style.small_gray}>Size:{product.size} </p>
-                </div>
-              </div>
-              <div className={style.price}>${product.price}</div>
-              <div className={style.quantity}>
-                <PlusMinusButton id={product.id} count={product.quantity} />
-              </div>
-              <div className={style.shipping}>FREE</div>
-              <div className={style.subtotal}>
-                ${product.quantity * product.price}
-              </div>
-              <div className={style.action}>
-                <button
-                  onClick={() => {
-                    handleDeleteItem(product.id);
-                  }}
-                >
-                  <img src={iconDelete} alt="delete" />
-                </button>
-              </div>
-            </div>
-          ))}
+        <DesktopCartItem cart={cart} handleDeleteItem={handleDeleteItem} />
         {cart.length > 0 && (
           <div className={clsx(style.bottom, 'container')}>
             <div className={style.discount_wrapper}>
