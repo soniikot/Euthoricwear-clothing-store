@@ -84,105 +84,110 @@ export const Cart: FC = () => {
           </p>
         </div>
       </div>
-
-      {cart.length === 0 && <EmptyList text="You haven't chose anything yet" />}
-      {cart.length > 0 && (
-        <div>
-          <div className={style.container}>
-            <div className={clsx(style.grid_row_header, 'container')}>
-              <div className={style.header_text}>PRODUCT DETAILS</div>
-              <div className={style.header_text}>PRICE</div>
-              <div className={style.header_text}>QUANTITY</div>
-              <div className={style.header_text}>SHIPPING</div>
-              <div className={style.header_text}>SUBTOTAL</div>
-              <div className={style.header_text}>ACTION</div>
+      <div className={style.wrapper}>
+        {cart.length === 0 && (
+          <EmptyList text="You haven't chose anything yet" />
+        )}
+        {cart.length > 0 && (
+          <div>
+            <div className={style.container}>
+              <div className={clsx(style.grid_row_header, 'container')}>
+                <div className={style.header_text}>PRODUCT DETAILS</div>
+                <div className={style.header_text}>PRICE</div>
+                <div className={style.header_text}>QUANTITY</div>
+                <div className={style.header_text}>SHIPPING</div>
+                <div className={style.header_text}>SUBTOTAL</div>
+                <div className={style.header_text}>ACTION</div>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-      {cart.length > 0 &&
-        cart.map((product) => (
-          <div key={product.id} className={clsx(style.grid_row, 'container')}>
-            <div className={style.description}>
-              <div className={style.image_container}>
-                <img
-                  className={style.image}
-                  src={import.meta.env.VITE_API_UPLOAD_URL + product.img}
-                  alt="clothes"
+        )}
+        {cart.length > 0 &&
+          cart.map((product) => (
+            <div key={product.id} className={clsx(style.grid_row, 'container')}>
+              <div className={style.description}>
+                <div className={style.image_container}>
+                  <img
+                    className={style.image}
+                    src={import.meta.env.VITE_API_UPLOAD_URL + product.img}
+                    alt="clothes"
+                  />
+                </div>
+                <div className={style.description_text}>
+                  <h5 className={style.product_title}>{product.title}</h5>
+                  <p className={style.small_gray}>Color:{product.color} </p>
+                  <p className={style.small_gray}>Size:{product.size} </p>
+                </div>
+              </div>
+              <div className={style.price}>${product.price}</div>
+              <div className={style.quantity}>
+                <PlusMinusButton id={product.id} count={product.quantity} />
+              </div>
+              <div className={style.shipping}>FREE</div>
+              <div className={style.subtotal}>
+                ${product.quantity * product.price}
+              </div>
+              <div className={style.action}>
+                <button
+                  onClick={() => {
+                    handleDeleteItem(product.id);
+                  }}
+                >
+                  <img src={iconDelete} alt="delete" />
+                </button>
+              </div>
+            </div>
+          ))}
+        {cart.length > 0 && (
+          <div className={clsx(style.bottom, 'container')}>
+            <div className={style.discount_wrapper}>
+              <h4>Discount Codes</h4>
+              <p className={style.grey}>
+                Enter your coupon code if you have one
+              </p>
+              <form className={style.form} onSubmit={(e) => e.preventDefault()}>
+                <input
+                  type="text"
+                  onChange={handleCouponChange}
+                  placeholder="Enter coupon code"
                 />
-              </div>
-              <div className={style.description_text}>
-                <h5 className={style.product_title}>{product.title}</h5>
-                <p className={style.small_gray}>Color:{product.color} </p>
-                <p className={style.small_gray}>Size:{product.size} </p>
-              </div>
-            </div>
-            <div className={style.price}>${product.price}</div>
-            <div className={style.quantity}>
-              <PlusMinusButton id={product.id} count={product.quantity} />
-            </div>
-            <div className={style.shipping}>FREE</div>
-            <div className={style.subtotal}>
-              ${product.quantity * product.price}
-            </div>
-            <div className={style.action}>
-              <button
-                onClick={() => {
-                  handleDeleteItem(product.id);
-                }}
-              >
-                <img src={iconDelete} alt="delete" />
-              </button>
-            </div>
-          </div>
-        ))}
-      {cart.length > 0 && (
-        <div className={clsx(style.bottom, 'container')}>
-          <div className={style.discount_wrapper}>
-            <h4>Discount Codes</h4>
-            <p className={style.grey}>Enter your coupon code if you have one</p>
-            <form className={style.form} onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="text"
-                onChange={handleCouponChange}
-                placeholder="Enter coupon code"
+                <input
+                  type="button"
+                  className={style.button}
+                  value="Apply Coupon"
+                  onClick={handleApplyCoupon}
+                />
+              </form>
+
+              {message && <p className={style.message}>{message}</p>}
+
+              <TextButtonWithLink
+                text="Continue Shopping"
+                buttonColor="white"
+                link="/products/"
               />
-              <input
-                type="button"
-                className={style.button}
-                value="Apply Coupon"
-                onClick={handleApplyCoupon}
-              />
-            </form>
-
-            {message && <p className={style.message}>{message}</p>}
-
-            <TextButtonWithLink
-              text="Continue Shopping"
-              buttonColor="white"
-              link="/products/"
-            />
-          </div>
-
-          <div className={style.total}>
-            <div className={style.text}>
-              <h4 className={style.sub_total}>
-                <span>Sub Total:</span>
-                <span className={style.price}>${getSubtotalPrice()}</span>
-              </h4>
-              <h4 className={style.sub_total}>
-                <span>Shipping</span>
-                <span className={style.price}>Free</span>
-              </h4>
-              <h4 className={style.sub_total}>
-                <span>Grand Total:</span>
-                <span className={style.price}>${getSubtotalPrice()}</span>
-              </h4>
             </div>
-            <PaymentButton cart={cart} />
+
+            <div className={style.total}>
+              <div className={style.text}>
+                <h4 className={style.sub_total}>
+                  <span>Sub Total:</span>
+                  <span className={style.price}>${getSubtotalPrice()}</span>
+                </h4>
+                <h4 className={style.sub_total}>
+                  <span>Shipping</span>
+                  <span className={style.price}>Free</span>
+                </h4>
+                <h4 className={style.sub_total}>
+                  <span>Grand Total:</span>
+                  <span className={style.price}>${getSubtotalPrice()}</span>
+                </h4>
+              </div>
+              <PaymentButton cart={cart} />
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </>
   );
 };

@@ -11,7 +11,7 @@ import { setUsername } from '@/features/user/userSlice';
 
 export const LoginPage: FC = () => {
   const [message, setMessage] = useState<string>('');
-  const [formVisible, setFormVisible] = useState(true);
+  const [_formVisible, setFormVisible] = useState(true);
 
   const username = useAppSelector((state: RootState) => state.user.username);
 

@@ -23,7 +23,9 @@ export const Footer: FC = () => {
             <li>
               <span className={style.bold}>Company</span>
             </li>
-            <Link to='/about/'><li>About Us</li></Link>
+            <Link to="/about/">
+              <li>About Us</li>
+            </Link>
             <li>Euphoria Blog</li>
             <li>Euphoriastan</li>
             <li>Collaboration</li>
@@ -50,12 +52,9 @@ export const Footer: FC = () => {
         </div>
         <div className={style.social_media}>
           <img className={style.icons} src={socialMedia} alt="social media" />
-          <div className={style.app_container}>
-        
-          </div>
+          <div className={style.app_container}></div>
         </div>
 
-        <h3 className={style.title}>Popular Categories</h3>
         <p className={style.text}>
           Copyright © 2024 Euphoria Folks Pvt Ltd. All rights reserved.
         </p>
