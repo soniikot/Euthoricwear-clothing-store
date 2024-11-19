@@ -1,7 +1,10 @@
 import style from './styles.module.scss';
-import socialMedia from '@/assets/social_media.png';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
+import facebook from '@/assets/facebook.svg';
+import twitter from '@/assets/twitter.png';
+import instagram from '@/assets/instagram.png';
+import link from '@/assets/link.svg';
 
 export const Footer: FC = () => {
   return (
@@ -12,34 +15,83 @@ export const Footer: FC = () => {
             <li>
               <span className={style.bold}>Need Help</span>
             </li>
-            <li>Contact Us</li>
-            <li>Track Order</li>
-            <li>Return & Refunds</li>
-            <li>FAQ's</li>
-            <li>Career</li>
+            <li>
+              <a
+                href="https://www.linkedin.com/in/sofia-kotova-1b7757230/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Contact Us
+              </a>
+            </li>
+            <li>
+              <Link to="/about">Track Order</Link>
+            </li>
+            <li>
+              <Link to="/about">Return & Refunds</Link>
+            </li>
+            <li>
+              <Link to="/about">FAQ's</Link>
+            </li>
           </ul>
 
           <ul>
             <li>
               <span className={style.bold}>Company</span>
             </li>
-            <Link to="/about/">
-              <li>About Us</li>
-            </Link>
-            <li>Euphoria Blog</li>
-            <li>Euphoriastan</li>
-            <li>Collaboration</li>
-            <li>Media</li>
+
+            <li>
+              <a
+                href="https://www.linkedin.com/in/sofia-kotova-1b7757230/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                About Us
+              </a>
+            </li>
+
+            <li>
+              <a
+                href="https://www.linkedin.com/in/sofia-kotova-1b7757230/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Euphoria Blog
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.linkedin.com/in/sofia-kotova-1b7757230/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Collaboration
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/soniikot"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Media
+              </a>
+            </li>
           </ul>
 
           <ul>
             <li>
               <span className={style.bold}>More Info</span>
             </li>
-            <li>Terms and Conditions</li>
-            <li>Privacy Policy</li>
-            <li>Shopping Policy</li>
-            <li>Sitemap</li>
+            <li>
+              <Link to="/about">Terms and Conditions</Link>
+            </li>
+            <li>
+              <Link to="/about">Privacy Policy</Link>
+            </li>
+            <li>
+              <Link to="/about">Shopping Policy</Link>
+            </li>
           </ul>
 
           <ul>
@@ -51,8 +103,36 @@ export const Footer: FC = () => {
           </ul>
         </div>
         <div className={style.social_media}>
-          <img className={style.icons} src={socialMedia} alt="social media" />
-          <div className={style.app_container}></div>
+          <a
+            href="https://www.facebook.com/sophia.kotova/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className={style.icons} src={facebook} alt="social media" />
+          </a>
+          <a
+            href="https://www.instagram.com/soniikot/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className={style.icons} src={instagram} alt="social media" />
+          </a>
+
+          <a
+            href=" https://x.com/kotiison"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className={style.icons} src={twitter} alt="social media" />
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/sofia-kotova-1b7757230/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className={style.icons} src={link} alt="social media" />
+          </a>
         </div>
 
         <p className={style.text}>

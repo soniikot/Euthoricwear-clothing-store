@@ -32,23 +32,21 @@ export const MobileCartItem: FC<MobileCartItemProps> = ({
                 <p className={style.small_gray}>Size: {product.size}</p>{' '}
                 <div className={style.price}>Price: ${product.price}</div>
               </div>
-            </div>
-            <div className={style.bottom}>
-              <div className={style.quantity}>
-                <PlusMinusButton id={product.id} count={product.quantity} />
-                <div className={style.action}>
-                  <button
-                    className={style.delete_button}
-                    onClick={() => {
-                      handleDeleteItem(product.id);
-                    }}
-                  >
-                    <img src={iconDelete} alt="delete" />
-                  </button>
+
+              <div className={style.bottom}>
+                <div className={style.quantity}>
+                  <PlusMinusButton id={product.id} count={product.quantity} />
+                  <div className={style.action}>
+                    <button
+                      className={style.delete_button}
+                      onClick={() => {
+                        handleDeleteItem(product.id);
+                      }}
+                    >
+                      <img src={iconDelete} alt="delete" />
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div className={style.subtotal}>
-                <p>Shipping: FREE</p>
               </div>
             </div>
           </div>

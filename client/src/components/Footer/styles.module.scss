@@ -26,8 +26,8 @@
 .social_media {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 0px 170px 30px 90px;
+  gap: 10px;
 }
 
 .title {
@@ -43,9 +43,7 @@
 
 @media (max-width: $small) {
   .social_media {
-    flex-direction: column;
-    gap: 80px;
-    padding: 10px;
+    gap: 10px;
   }
 
   .wrapper {

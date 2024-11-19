@@ -34,6 +34,8 @@ export const Cart: FC = () => {
 
   const dispatch = useAppDispatch();
 
+  const username = useAppSelector((state: RootState) => state.user.username);
+
   const handleDeleteItem = (id: number) => {
     dispatch(removeItem(id));
   };
@@ -77,14 +79,18 @@ export const Cart: FC = () => {
             Please fill in the fields below and click place order to complete
             your purchase!
           </p>
-          <p className={style.grey}>
-            Already registered?
-            <a href="" className="purple">
-              <span className="purple">
-                <Link to="/login"> Please login here</Link>
-              </span>
-            </a>
-          </p>
+          {username === '' && (
+            <div className={style.register}>
+              <p className={style.grey}>
+                Already registered?
+                <a href="" className="purple">
+                  <span className="purple">
+                    <Link to="/login"> Please login here</Link>
+                  </span>
+                </a>
+              </p>
+            </div>
+          )}
         </div>
       </div>
       <div className={style.wrapper}>
