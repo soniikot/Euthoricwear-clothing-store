@@ -4,8 +4,8 @@ import cartReducer from '../features/cart/cartSlice';
 import categoryReducer from '../features/categories/categoriesSlice';
 import searchReducer from '../features/Search/SearchSlice';
 import filterReducer from '../features/filter/filterSlice';
-import useReducer from '../features/user/userSlice';
-
+import userReducer from '../features/user/userSlice';
+import favesReducer from '../features/faves/favesSlice';
 export const store = configureStore({
   reducer: {
     products: productReducer,
@@ -13,7 +13,8 @@ export const store = configureStore({
     categories: categoryReducer,
     search: searchReducer,
     filter: filterReducer,
-    user: useReducer,
+    user: userReducer,
+    faves: favesReducer,
   },
 });
 

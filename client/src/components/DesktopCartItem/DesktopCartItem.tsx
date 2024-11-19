@@ -15,7 +15,8 @@ export const DesktopCartItem: FC<DesktopCartItemProps> = ({
 }) => {
   return (
     <>
-      {cart.length > 0 &&
+      {cart &&
+        cart.length > 0 &&
         cart.map((product) => (
           <div key={product.id} className={clsx(style.grid_row, 'container')}>
             <div className={style.description}>

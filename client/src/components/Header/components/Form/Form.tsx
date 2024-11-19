@@ -17,14 +17,16 @@ export const Form: FC = () => {
   const isActiveCart = location.pathname === '/cart';
   const isActiveLogin = location.pathname === '/login';
 
-  const cart: CartData[] = useAppSelector(
-    (state: RootState) => state.cart.cart
-  );
+  const cart: CartData[] =
+    useAppSelector((state: RootState) => state.cart.cart) || [];
 
   const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0);
+
   return (
     <div className={style.form}>
-      <IconButton icon={heart} />
+      <Link to="/likes">
+        <IconButton icon={heart} />
+      </Link>
       <Link to="/login">
         <IconButton
           icon={isActiveLogin ? userWhite : userGrey}
@@ -36,7 +38,7 @@ export const Form: FC = () => {
           icon={isActiveCart ? shoppingCartWhite : shoppingCart}
           isActive={isActiveCart}
         />
-        {cartItemCount > 0 && (
+        {cart && cart.length > 0 && cartItemCount > 0 && (
           <div className={style.cart_item_count}>{cartItemCount}</div>
         )}
       </Link>

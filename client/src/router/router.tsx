@@ -8,6 +8,7 @@ import { Cart } from '@/pages/Cart/Cart';
 import ScrollToTop from '@/helpers/ScrollToTop';
 import { LoginPage } from '@/pages/LoginPage/LoginPage';
 import RegistrationPage from '@/pages/RegistationPage/RegistationPage';
+import { FavPage } from '@/pages/FavPage/FavPage';
 
 export const router = createBrowserRouter([
   {
@@ -71,6 +72,14 @@ export const router = createBrowserRouter([
         element: (
           <ScrollToTop>
             <RegistrationPage />
+          </ScrollToTop>
+        ),
+      },
+      {
+        path: '/likes/',
+        element: (
+          <ScrollToTop>
+            <FavPage />
           </ScrollToTop>
         ),
       },

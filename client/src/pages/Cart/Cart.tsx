@@ -1,11 +1,10 @@
 import style from './styles.module.scss';
-import { TextButtonWithLink } from '@/shared/components/TextButtonWithLink/TextButtonWithLink';
 import clsx from 'clsx';
 import { useAppSelector } from '@/app/hooks';
 import { RootState } from '@/app/store';
 import { useAppDispatch } from '@/app/hooks';
-import { removeItem, applyDiscount } from '../../features/cart/cartSlice';
-import { FC, useState } from 'react';
+import { removeItem } from '../../features/cart/cartSlice';
+import { FC } from 'react';
 import { EmptyList } from '@/components/EmptyList/EmptyList';
 import { PaymentButton } from '@/components/PaymentButton/PaymentButton';
 import { Link } from 'react-router-dom';
@@ -24,14 +23,9 @@ export interface CartData {
 }
 
 export const Cart: FC = () => {
-  const [couponCode, setCouponCode] = useState('');
-  const [_discountApplied, setDiscountApplied] = useState(false);
-  const [message, setMessage] = useState('');
-
   const cart: CartData[] = useAppSelector(
     (state: RootState) => state.cart.cart
   );
-
   const dispatch = useAppDispatch();
 
   const username = useAppSelector((state: RootState) => state.user.username);
@@ -43,33 +37,12 @@ export const Cart: FC = () => {
   const getSubtotalPrice = () => {
     let total = 0;
     cart.forEach((item) => {
-      total += item.quantity * item.price;
+      total += item.price * item.quantity;
     });
     return total;
   };
 
   const isMobile = useMediaQuery('(max-width: 500px)');
-
-  const handleCouponChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setCouponCode(event.target.value);
-  };
-
-  const handleApplyCoupon = () => {
-    if (couponCode === 'DISCOUNT10') {
-      const discount = 0.1;
-
-      const updatedCart = cart.map((item) => ({
-        ...item,
-        price: item.price * (1 - discount),
-      }));
-
-      dispatch(applyDiscount(updatedCart));
-      setDiscountApplied(true);
-      setMessage('Coupon applied successfully!');
-    } else {
-      setMessage('Invalid coupon code.');
-    }
-  };
 
   return (
     <>
@@ -94,10 +67,10 @@ export const Cart: FC = () => {
         </div>
       </div>
       <div className={style.wrapper}>
-        {cart.length === 0 && (
-          <EmptyList text="You haven't chose anything yet" />
+        {cart && cart.length === 0 && (
+          <EmptyList text="You haven't chosen anything yet" />
         )}
-        {cart.length > 0 && (
+        {cart && cart.length > 0 && (
           <div>
             <div className={style.container}>
               <div className={clsx(style.grid_row_header, 'container')}>
@@ -117,41 +90,15 @@ export const Cart: FC = () => {
           <DesktopCartItem cart={cart} handleDeleteItem={handleDeleteItem} />
         )}
 
-        {cart.length > 0 && (
+        {cart && cart.length > 0 && (
           <div className={clsx(style.bottom, 'container')}>
-            <div className={style.discount_wrapper}>
-              <h4>Discount Codes</h4>
-              <p className={style.grey}>
-                Enter your coupon code if you have one
-              </p>
-              <form className={style.form} onSubmit={(e) => e.preventDefault()}>
-                <input
-                  type="text"
-                  onChange={handleCouponChange}
-                  placeholder="Enter coupon code"
-                />
-                <input
-                  type="button"
-                  className={style.button}
-                  value="Apply Coupon"
-                  onClick={handleApplyCoupon}
-                />
-              </form>
-
-              {message && <p className={style.message}>{message}</p>}
-
-              <TextButtonWithLink
-                text="Continue Shopping"
-                buttonColor="white"
-                link="/products/"
-              />
-            </div>
-
             <div className={style.total}>
               <div className={style.text}>
                 <h4 className={style.sub_total}>
                   <span>Sub Total:</span>
-                  <span className={style.price}>${getSubtotalPrice()}</span>
+                  <span className={style.price}>
+                    ${getSubtotalPrice().toFixed(2)}
+                  </span>
                 </h4>
                 <h4 className={style.sub_total}>
                   <span>Shipping</span>
@@ -159,7 +106,7 @@ export const Cart: FC = () => {
                 </h4>
                 <h4 className={style.sub_total}>
                   <span>Grand Total:</span>
-                  <span className={style.price}>${getSubtotalPrice()}</span>
+                  <span className={style.price}>${totalPrice.toFixed(2)}</span>
                 </h4>
               </div>
               <PaymentButton cart={cart} />
