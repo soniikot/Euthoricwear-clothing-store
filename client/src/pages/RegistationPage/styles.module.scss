@@ -8,6 +8,7 @@
   align-self: center;
   align-items: center;
   flex-basis: 50%;
+  height: 600px;
 }
 
 .image_wrapper {
@@ -33,7 +34,7 @@
   flex-basis: 50%;
 }
 
-@media (max-width: $small) {
+@media (max-width: $medium) {
   .image_wrapper {
     display: none;
   }
