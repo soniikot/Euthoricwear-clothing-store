@@ -1,18 +1,29 @@
 import { EmptyList } from '@/components/EmptyList/EmptyList';
-import { useAppSelector } from '@/app/hooks';
+import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { RootState } from '@/app/store';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import style from './styles.module.scss';
+import heart from '@/assets/heart.svg';
+import heartWhite from '@/assets/heart-white.svg';
+import { removeItem } from '@/features/faves/favesSlice';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const FavPage: FC = () => {
-  const { products } = useAppSelector((state: RootState) => state.products);
   const { faves } = useAppSelector((state: RootState) => state.faves);
+  const dispatch = useAppDispatch();
 
-  console.log('Products:', products);
-  console.log('Favorite Items:', faves);
+  const handleToggleFavorite = (product: any) => {
+    const isFavorite = faves.some((item) => item.id === product.id);
 
+    if (isFavorite) {
+      dispatch(removeItem(product.id));
+      toast.info('Product removed from favorites!');
+    } else {
+    }
+  };
   return (
     <div className="container">
       {faves.length === 0 ? (
@@ -24,6 +35,26 @@ export const FavPage: FC = () => {
               <>
                 <Link to={`/product/${product.id - 1}`} key={product.id}>
                   <div key={product.id} className={style.card}>
+                    <button
+                      className={clsx(style.favorites_button, {
+                        [style.active]: faves.some(
+                          (item) => item.id === product.id
+                        ),
+                      })}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        handleToggleFavorite(product);
+                      }}
+                    >
+                      <img
+                        src={
+                          faves.some((item) => item.id === product.id)
+                            ? heartWhite
+                            : heart
+                        }
+                        alt="add to favorites"
+                      />
+                    </button>
                     <img
                       className={clsx(style.img)}
                       src={import.meta.env.VITE_API_UPLOAD_URL + product.img}
@@ -41,6 +72,7 @@ export const FavPage: FC = () => {
           </div>
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 };

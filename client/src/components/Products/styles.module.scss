@@ -69,6 +69,10 @@
   }
 }
 
+.favorites_button.active {
+  background-color: $--purple-color;
+}
+
 @media (max-width: $small) {
   .wrapper {
     grid-template-columns: repeat(1, 1fr);

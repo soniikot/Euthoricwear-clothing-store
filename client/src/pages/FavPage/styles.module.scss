@@ -43,6 +43,10 @@
   margin-bottom: 60px;
 }
 
+.favorites_button.active {
+  background-color: $--purple-color;
+}
+
 @media (max-width: $medium) {
   .wrapper {
     grid-template-columns: repeat(2, 1fr);

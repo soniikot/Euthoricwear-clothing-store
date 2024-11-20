@@ -106,7 +106,9 @@ export const Cart: FC = () => {
                 </h4>
                 <h4 className={style.sub_total}>
                   <span>Grand Total:</span>
-                  <span className={style.price}>${totalPrice.toFixed(2)}</span>
+                  <span className={style.price}>
+                    ${getSubtotalPrice().toFixed(2)}
+                  </span>
                 </h4>
               </div>
               <PaymentButton cart={cart} />
