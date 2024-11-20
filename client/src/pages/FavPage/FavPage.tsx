@@ -31,7 +31,7 @@ export const FavPage: FC = () => {
                     />
                     <div className={style.text_wrapper}>
                       <p className={clsx(style.title)}>{product.title}</p>
-                      <p className={clsx(style.subtitle)}>{product.disc}</p>
+                      <p className={clsx(style.subtitle)}>{product.subtitle}</p>
                       <div className={clsx(style.price)}>${product.price}</div>
                     </div>
                   </div>

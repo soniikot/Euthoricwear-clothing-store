@@ -1,7 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { CartData } from '@/pages/Cart/Cart';
+
+export interface FavesData {
+  id: number;
+  title: string;
+  price: number;
+  img: string;
+  color: string;
+  subtitle: string;
+}
+
 interface FavesState {
-  faves: CartData[];
+  faves: FavesData[];
 }
 const initialState: FavesState = {
   faves: [],
@@ -15,7 +24,6 @@ export const favesSlice = createSlice({
       const item = state.faves.find((item) => item.id === action.payload.id);
 
       if (item) {
-        item.quantity += action.payload.quantity;
       } else {
         state.faves.push(action.payload);
       }

@@ -29,11 +29,11 @@ export const Products: FC<ProductsTypeProps> = ({
   const handleAddToFavorites = (product: any) => {
     const favoriteProduct = {
       id: product.id,
-      quantity: 1,
       title: product.attributes.title,
       price: product.attributes.price,
       img: product.attributes.img.data.attributes.url,
       color: product.attributes.color,
+      subtitle: product.attributes.disc,
     };
     dispatch(addItem(favoriteProduct));
     toast.success('Product added to favorites!');

@@ -1,5 +1,6 @@
 import style from './styles.module.scss';
 import heart from '@/assets/heart.svg';
+import heartWhite from '@/assets/heart-white.svg';
 import userWhite from '@/assets/user-white.svg';
 import userGrey from '@/assets/user-grey.svg';
 import shoppingCart from '@/assets/shopping-cart.svg';
@@ -16,6 +17,7 @@ export const Form: FC = () => {
 
   const isActiveCart = location.pathname === '/cart';
   const isActiveLogin = location.pathname === '/login';
+  const isActiveLikes = location.pathname === '/likes';
 
   const cart: CartData[] =
     useAppSelector((state: RootState) => state.cart.cart) || [];
@@ -25,7 +27,10 @@ export const Form: FC = () => {
   return (
     <div className={style.form}>
       <Link to="/likes">
-        <IconButton icon={heart} />
+        <IconButton
+          icon={isActiveLikes ? heartWhite : heart}
+          isActive={isActiveLikes}
+        />
       </Link>
       <Link to="/login">
         <IconButton
