@@ -3,7 +3,6 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 40px;
-
   background-color: $--dark-grey-text-color;
   padding: 60px 90px;
   font-size: 18px;
@@ -27,12 +26,8 @@
 .social_media {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 0px 170px 30px 90px;
-}
-
-.apps {
-  display: flex;
+  gap: 10px;
 }
 
 .title {
@@ -46,19 +41,18 @@
   padding-bottom: 40px;
 }
 
-.app_container {
-  position: relative;
-}
-
-.app_title {
-  position: absolute;
-  top: -55px;
-}
-
 @media (max-width: $small) {
   .social_media {
-    flex-direction: column;
-    gap: 80px;
-    padding: 10px;
+    gap: 10px;
+  }
+
+  .wrapper {
+    padding: 10px 10px;
+    font-size: 14px;
+    gap: 60px;
+  }
+
+  .text {
+    font-size: 13px;
   }
 }

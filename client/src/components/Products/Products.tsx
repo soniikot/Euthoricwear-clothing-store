@@ -5,10 +5,18 @@ import { selectProducts } from '@/features/products/productsSlice';
 import { EmptyList } from '../EmptyList/EmptyList';
 import { Link } from 'react-router-dom';
 import clsx from 'clsx';
-
+import { addItem, removeItem } from '@/features/faves/favesSlice';
+import { useAppDispatch } from '@/app/hooks';
+import heart from '@/assets/heart.svg';
+import heartWhite from '@/assets/heart-white.svg';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ProductData } from '@/types/interfaces';
+import { RootState } from '@/app/store';
 export interface ProductsTypeProps {
   numberOfProducts: number;
   isProductPage?: boolean;
+  products?: ProductData[];
 }
 
 export const Products: FC<ProductsTypeProps> = ({
@@ -16,6 +24,29 @@ export const Products: FC<ProductsTypeProps> = ({
   isProductPage,
 }) => {
   const products = useAppSelector(selectProducts);
+  const { faves } = useAppSelector((state: RootState) => state.faves);
+  const dispatch = useAppDispatch();
+
+  const handleToggleFavorite = (product: any) => {
+    const favoriteProduct = {
+      id: product.id,
+      title: product.attributes.title,
+      price: product.attributes.price,
+      img: product.attributes.img.data.attributes.url,
+      color: product.attributes.color,
+      subtitle: product.attributes.disc,
+    };
+
+    const isFavorite = faves.some((item) => item.id === product.id);
+
+    if (isFavorite) {
+      dispatch(removeItem(product.id));
+      toast.info('Product removed from favorites!');
+    } else {
+      dispatch(addItem(favoriteProduct));
+      toast.success('Product added to favorites!');
+    }
+  };
 
   return (
     <>
@@ -31,6 +62,26 @@ export const Products: FC<ProductsTypeProps> = ({
             {products.slice(0, numberOfProducts).map((product) => (
               <Link to={`/product/${product.id - 1}`} key={product.id}>
                 <div key={product.id} className={style.card}>
+                  <button
+                    className={clsx(style.favorites_button, {
+                      [style.active]: faves.some(
+                        (item) => item.id === product.id
+                      ),
+                    })}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleToggleFavorite(product);
+                    }}
+                  >
+                    <img
+                      src={
+                        faves.some((item) => item.id === product.id)
+                          ? heartWhite
+                          : heart
+                      }
+                      alt="add to favorites"
+                    />
+                  </button>
                   <img
                     className={clsx(style.img, {
                       [style.product_page_img]: isProductPage,
@@ -57,13 +108,13 @@ export const Products: FC<ProductsTypeProps> = ({
                     >
                       {product.attributes.disc}
                     </p>
-                  </div>
-                  <div
-                    className={clsx(style.price, {
-                      [style.product_page_price]: isProductPage,
-                    })}
-                  >
-                    ${product.attributes.price}
+                    <div
+                      className={clsx(style.price, {
+                        [style.product_page_price]: isProductPage,
+                      })}
+                    >
+                      ${product.attributes.price}
+                    </div>
                   </div>
                 </div>
               </Link>
@@ -71,7 +122,7 @@ export const Products: FC<ProductsTypeProps> = ({
           </div>
         </div>
       )}
-      ;
+      <ToastContainer />
     </>
   );
 };

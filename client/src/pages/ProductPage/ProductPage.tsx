@@ -19,7 +19,7 @@ export const ProductPage = () => {
   const [selectedImg, setSelectedImg] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    if (products.length === 0) {
+    if (!products || products.length === 0) {
       return;
     }
     const initialImage =
@@ -33,7 +33,7 @@ export const ProductPage = () => {
       <div className={style.wrapper}>
         <div className={style.images}>
           <div className={style.side_images}>
-            {products.length > 0 && (
+            {products && products.length > 0 && (
               <img
                 src={
                   import.meta.env.VITE_API_UPLOAD_URL +

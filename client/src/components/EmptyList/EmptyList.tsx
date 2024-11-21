@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { TextButton } from '@/shared/components/TextButton/TextButton';
+import { TextButtonWithLink } from '@/shared/components/TextButtonWithLink/TextButtonWithLink';
 import style from './styles.module.scss';
 
 interface EmptyList {
@@ -11,7 +11,11 @@ export const EmptyList: FC<EmptyList> = ({ text }) => {
     <div className={style.wrapper}>
       <h2>{text}</h2>
 
-      <TextButton text="Continue Shopping" buttonColor="purple" link="/" />
+      <TextButtonWithLink
+        text="Continue Shopping"
+        buttonColor="purple"
+        link="/"
+      />
     </div>
   );
 };

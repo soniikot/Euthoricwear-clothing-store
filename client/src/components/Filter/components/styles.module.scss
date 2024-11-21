@@ -13,6 +13,20 @@
   border-radius: 12px;
 }
 
+.header {
+  padding: 20px 20px 20px 10px;
+  display: flex;
+  justify-content: space-between;
+  color: $--grey-text-color;
+  cursor: pointer;
+}
+
+.colorActive {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  border-color: #333;
+  background-color: #e0e0e0;
+}
+
 @media (max-width: $medium) {
   .wrapper {
     grid-template-columns: repeat(3, 1fr);

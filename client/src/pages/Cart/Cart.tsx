@@ -1,8 +1,4 @@
-import { NavigationBar } from './components/NavigationBar/NavigationBar';
 import style from './styles.module.scss';
-import { PlusMinusButton } from './components/PlusMinusButton/PlusMinusButton';
-import iconDelete from '@/assets/deleteicon.svg';
-import { TextButton } from '@/shared/components/TextButton/TextButton';
 import clsx from 'clsx';
 import { useAppSelector } from '@/app/hooks';
 import { RootState } from '@/app/store';
@@ -11,6 +7,10 @@ import { removeItem } from '../../features/cart/cartSlice';
 import { FC } from 'react';
 import { EmptyList } from '@/components/EmptyList/EmptyList';
 import { PaymentButton } from '@/components/PaymentButton/PaymentButton';
+import { Link } from 'react-router-dom';
+import { useMediaQuery } from '@mui/material';
+import { DesktopCartItem } from '@/components/DesktopCartItem/DesktopCartItem';
+import { MobileCartItem } from '@/components/MobileCartItem/MobileCartItem';
 
 export interface CartData {
   id: number;
@@ -26,8 +26,9 @@ export const Cart: FC = () => {
   const cart: CartData[] = useAppSelector(
     (state: RootState) => state.cart.cart
   );
-
   const dispatch = useAppDispatch();
+
+  const username = useAppSelector((state: RootState) => state.user.username);
 
   const handleDeleteItem = (id: number) => {
     dispatch(removeItem(id));
@@ -36,114 +37,84 @@ export const Cart: FC = () => {
   const getSubtotalPrice = () => {
     let total = 0;
     cart.forEach((item) => {
-      total += item.quantity * item.price;
+      total += item.price * item.quantity;
     });
     return total;
   };
 
+  const isMobile = useMediaQuery('(max-width: 500px)');
+
   return (
     <>
       <div className="container">
-        <NavigationBar />
         <div className={style.text}>
           <p className={style.grey}>
             Please fill in the fields below and click place order to complete
             your purchase!
           </p>
-          <p className={style.grey}>
-            Already registered?
-            <a href="" className="purple">
-              <span className="purple">Please login here</span>
-            </a>
-          </p>
+          {username === '' && (
+            <div className={style.register}>
+              <p className={style.grey}>
+                Already registered?
+                <a href="" className="purple">
+                  <span className="purple">
+                    <Link to="/login"> Please login here</Link>
+                  </span>
+                </a>
+              </p>
+            </div>
+          )}
         </div>
       </div>
-
-      <div className={style.container}>
-        <div className={clsx(style.grid_row_header, 'container')}>
-          <div className={style.header_text}>PRODUCT DETAILS</div>
-          <div className={style.header_text}>PRICE</div>
-          <div className={style.header_text}>QUANTITY</div>
-          <div className={style.header_text}>SHIPPING</div>
-          <div className={style.header_text}>SUBTOTAL</div>
-          <div className={style.header_text}>ACTION</div>
-        </div>
-        {cart.length === 0 && (
-          <EmptyList text="You haven't chose anything yet" />
+      <div className={style.wrapper}>
+        {cart && cart.length === 0 && (
+          <EmptyList text="You haven't chosen anything yet" />
         )}
-        {cart.length > 0 &&
-          cart.map((product) => (
-            <div key={product.id} className={clsx(style.grid_row, 'container')}>
-              <div className={style.description}>
-                <div className={style.image_container}>
-                  <img
-                    className={style.image}
-                    src={import.meta.env.VITE_API_UPLOAD_URL + product.img}
-                    alt="clothes"
-                  />
-                </div>
-                <div className={style.description_text}>
-                  <h5 className={style.product_title}>{product.title}</h5>
-                  <p className={style.small_gray}>Color:{product.color} </p>
-                  <p className={style.small_gray}>Size:{product.size} </p>
-                </div>
-              </div>
-              <div className={style.price}>${product.price}</div>
-              <div className={style.quantity}>
-                <PlusMinusButton id={product.id} count={product.quantity} />
-              </div>
-              <div className={style.shipping}>FREE</div>
-              <div className={style.subtotal}>
-                ${product.quantity * product.price}
-              </div>
-              <div className={style.action}>
-                <button
-                  onClick={() => {
-                    handleDeleteItem(product.id);
-                  }}
-                >
-                  <img src={iconDelete} alt="delete" />
-                </button>
+        {cart && cart.length > 0 && (
+          <div>
+            <div className={style.container}>
+              <div className={clsx(style.grid_row_header, 'container')}>
+                <div className={style.header_text}>PRODUCT DETAILS</div>
+                <div className={style.header_text}>PRICE</div>
+                <div className={style.header_text}>QUANTITY</div>
+                <div className={style.header_text}>SHIPPING</div>
+                <div className={style.header_text}>SUBTOTAL</div>
+                <div className={style.header_text}>ACTION</div>
               </div>
             </div>
-          ))}
-      </div>
-
-      <div className={clsx(style.bottom, 'container')}>
-        <div className={style.discount_wrapper}>
-          <h4>Discount Codes</h4>
-          <p className={style.grey}>Enter your coupon code if you have one</p>
-          <form className={style.form} action="">
-            <input type="text" />
-            <input
-              type="button"
-              className={style.button}
-              value="Apply Coupon"
-            />
-          </form>
-          <TextButton
-            text="Continue Shopping"
-            buttonColor="white"
-            link="/products/"
-          />
-        </div>
-        <div className={style.total}>
-          <div className={style.text}>
-            <h4 className={style.sub_total}>
-              <span>Sub Total:</span>
-              <span className={style.price}>${getSubtotalPrice()}</span>
-            </h4>
-            <h4 className={style.sub_total}>
-              <span>Shipping</span>
-              <span className={style.price}>Free</span>
-            </h4>
-            <h4 className={style.sub_total}>
-              <span>Grand Total:</span>
-              <span className={style.price}>${getSubtotalPrice()}</span>
-            </h4>
           </div>
-          <PaymentButton cart={cart} />
-        </div>
+        )}
+        {isMobile ? (
+          <MobileCartItem cart={cart} handleDeleteItem={handleDeleteItem} />
+        ) : (
+          <DesktopCartItem cart={cart} handleDeleteItem={handleDeleteItem} />
+        )}
+
+        {cart && cart.length > 0 && (
+          <div className={clsx(style.bottom, 'container')}>
+            <div className={style.total}>
+              <div className={style.text}>
+                <h4 className={style.sub_total}>
+                  <span>Sub Total:</span>
+                  <span className={style.price}>
+                    ${getSubtotalPrice().toFixed(2)}
+                  </span>
+                </h4>
+                <h4 className={style.sub_total}>
+                  <span>Shipping</span>
+                  <span className={style.price}>Free</span>
+                </h4>
+                <h4 className={style.sub_total}>
+                  <span>Grand Total:</span>
+                  <span className={style.price}>
+                    ${getSubtotalPrice().toFixed(2)}
+                  </span>
+                </h4>
+              </div>
+              <PaymentButton cart={cart} />
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

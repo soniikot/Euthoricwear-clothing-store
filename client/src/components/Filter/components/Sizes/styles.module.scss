@@ -14,6 +14,14 @@
   padding: 5px 10px;
 }
 
+.header {
+  padding: 20px 20px 20px 10px;
+  display: flex;
+  justify-content: space-between;
+  color: $--grey-text-color;
+  cursor: pointer;
+}
+
 .buttonActive {
   border: 1px solid black;
 }

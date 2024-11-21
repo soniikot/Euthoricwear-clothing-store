@@ -10,17 +10,21 @@ interface LinksWithProps {
 export const Links: FC<LinksWithProps> = ({ id }) => {
   const { products } = useAppSelector((state: RootState) => state.products);
 
-  const gender = products[id]?.attributes.categories.data[0].attributes.title;
+  const product = products[id];
+
+  if (!product) {
+    return <h5>Product not found</h5>;
+  }
+
+  const gender = product?.attributes?.categories?.data[0]?.attributes?.title;
   const subcategory =
-    products[id]?.attributes.subcategories.data[0].attributes.title;
+    product?.attributes?.subcategories?.data[0]?.attributes?.title;
 
   return (
     <h5>
       <Link to="/products">Shop</Link>&gt;
-      {products.length > 0 &&
-        gender.charAt(0).toUpperCase() + gender.slice(1)}
-      &gt;
-      {products.length > 0 &&
+      {gender && gender.charAt(0).toUpperCase() + gender.slice(1)} &gt;
+      {subcategory &&
         subcategory.charAt(0).toUpperCase() + subcategory.slice(1)}
     </h5>
   );

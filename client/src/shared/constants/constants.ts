@@ -1,18 +1,8 @@
 export const COLORS = [
   {
-    id: 1,
-    title: 'Purple',
-    color: '#7A288A',
-  },
-  {
     id: 2,
     title: 'Black',
     color: 'black',
-  },
-  {
-    id: 3,
-    title: 'Red',
-    color: 'red',
   },
   {
     id: 4,
@@ -29,16 +19,7 @@ export const COLORS = [
     title: 'White',
     color: 'white',
   },
-  {
-    id: 7,
-    title: 'Brown',
-    color: 'brown',
-  },
-  {
-    id: 8,
-    title: 'Green',
-    color: 'green',
-  },
+
   {
     id: 9,
     title: 'Yellow',
@@ -48,15 +29,5 @@ export const COLORS = [
     id: 10,
     title: 'Grey',
     color: 'grey',
-  },
-  {
-    id: 11,
-    title: 'Pink',
-    color: 'pink',
-  },
-  {
-    id: 12,
-    title: 'Teal',
-    color: 'teal',
   },
 ];

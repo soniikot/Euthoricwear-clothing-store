@@ -1,6 +1,6 @@
 import style from './styles.module.scss';
 import img from '../../assets/banner.jpeg';
-import { TextButton } from '../../shared/components/TextButton/TextButton';
+import { TextButtonWithLink } from '../../shared/components/TextButtonWithLink/TextButtonWithLink';
 import { FC } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -17,7 +17,7 @@ export const Banner: FC = () => {
             </p>
             <div className={style.button}>
               <Link to={'/products'}>
-                <TextButton
+                <TextButtonWithLink
                   text="Shop Now"
                   buttonColor="white"
                   link="/products/"

@@ -10,7 +10,7 @@ export const PaymentButton: FC<PaymentButtonProps> = ({ cart }) => {
   const stripePromise = loadStripe(
     'pk_test_51Q9wuPAoB7FsfDJTAWmTQwiO12bwE2ipelQqXrw65HsfYgorAJC9APIjY9KF67q6W5HnKzlniB2qfyAgNqTGr05t00hIIn4Jpx'
   );
-
+  const isCartEmpty = Object.keys(cart).length === 0;
   const handlePayment = async () => {
     try {
       const stripe = await stripePromise;
@@ -30,7 +30,11 @@ export const PaymentButton: FC<PaymentButtonProps> = ({ cart }) => {
   };
 
   return (
-    <button className={style.button_checkout} onClick={handlePayment}>
+    <button
+      className={style.button_checkout}
+      onClick={handlePayment}
+      disabled={isCartEmpty}
+    >
       PROCEED TO CHECKOUT
     </button>
   );

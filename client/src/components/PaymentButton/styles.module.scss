@@ -3,7 +3,13 @@
 .button_checkout {
   border-radius: 10px;
   padding: 10px 50px;
-
+  cursor: pointer;
   color: white;
   background-color: $--purple-color;
+}
+
+.button_checkout:disabled {
+  background-color: $--background-grey-color;
+  color: $--dark-grey-text-color;
+  cursor: not-allowed;
 }

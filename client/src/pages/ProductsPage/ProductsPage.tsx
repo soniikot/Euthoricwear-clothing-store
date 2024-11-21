@@ -17,43 +17,48 @@ export const ProductsPage: FC = () => {
         </div>
       </div>
       <div className={style.text}>
-        <SectionTitle text="Clothing for men and women Online in India" />
+        <SectionTitle text="Clothing for Men and Women Online" />
         <h4 className={style.subheader}>
-          Explore Clothing Collection Online at Euphoria
+          Explore Our Stylish Clothing Collection Online at Euphoria
         </h4>
+
         <p>
-          Clothing – Are you searching for the best website to buy Clothing for
-          men and women online in India? Well, your search for the coolest and
-          most stylish men and women clothing ends here. From trendy Casual men
-          and women Wear Online shopping to premium quality cotton apparel,
-          Euphoria has closet of men and women Collection covered with the
-          latest and best designs of Clothing Online.
+          Are you looking for the best website to buy clothing for men and women
+          online? Your search ends here at Euphoria. Whether you're looking for
+          trendy casual wear or premium-quality cotton apparel, we've got you
+          covered with a wide range of stylish options. Our collection features
+          the latest and best designs in clothing, making it easy for you to
+          find the perfect outfit.
         </p>
+
         <p>
-          Our collection of clothes for men and women will make you the
-          trendsetter with an iconic resemblance of choice in Wear.
+          Our curated collection of men’s and women’s clothing will help you
+          stand out as a trendsetter with unique and iconic styles that reflect
+          your personality.
         </p>
 
         <h4 className={style.subheader}>
-          One-Stop Destination to Shop Every Clothing : Euphoria
+          Euphoria: Your One-Stop Destination for Every Clothing Need
         </h4>
+
         <p>
-          Today, Clothing for men and women is gaining more popularity above
-          all. This is because gone are the days when men and women were used to
-          carrying uncomfortable fashion. Today, a lady looks prettier when she
-          is in Casual men and women's Wear which is a comfortable outfit.
-          Concerning this, Euphoria has a big fat range of Stylish men and
-          women's Clothing that would make her the winner wherever she goes.
+          Clothing for men and women is becoming more popular than ever, and
+          it’s no surprise. Gone are the days of uncomfortable fashion. Today,
+          comfort is key, and Euphoria offers a vast range of stylish clothing
+          that is as comfortable as it is fashionable. Whether you're looking
+          for casual wear or something a bit more formal, our collection ensures
+          you'll look your best without compromising on comfort.
         </p>
+
         <p>
-          Our collection of clothes for men and women will make you the
-          trendsetter with an iconic resemblance of choice in men and women
-          Wear. It is quite evident to say that there are very few men and women
-          Clothing online stores where you can buy Western Wear for men and
-          women comprising the premium material and elegant design that you are
-          always seeking for. Basically,
+          Our collection of men’s and women’s clothing sets you apart as a
+          trendsetter, offering iconic designs that blend comfort with style.
+          Few online stores offer such a wide selection of premium-quality
+          Western wear, crafted from the finest materials and designed with
+          elegance. At Euphoria, you’ll find the perfect pieces for your
+          wardrobe that reflect the latest trends and timeless style.
         </p>
-        <h4 className={style.subheader}>See More</h4>
+
         <SectionTitle text="Buy men and women's Clothing at Best Price" />
       </div>
 

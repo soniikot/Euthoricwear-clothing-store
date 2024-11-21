@@ -4,11 +4,11 @@ html {
 
 a {
   color: inherit;
-  cursor: inherit;
+  cursor: pointer;
 }
 
 a:hover {
-  color: inherit;
+  color: pointer;
 }
 
 .clearfix::after {
@@ -102,6 +102,7 @@ select {
 button {
   border: none;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 a {
