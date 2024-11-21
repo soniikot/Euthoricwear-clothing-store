@@ -2,7 +2,6 @@ import { Collapse, useTheme } from '@mui/material';
 import { useMediaQuery } from '@mui/material';
 import { useState } from 'react';
 import { FC } from 'react';
-
 import style from './styles.module.scss';
 import { CATEGORIES } from '../../constants';
 import clsx from 'clsx';
@@ -12,7 +11,7 @@ import { RootState } from '@/app/store';
 import { setCategory } from '@/features/filter/filterSlice';
 import linkArrow from '@/assets/link-arrow.svg';
 import linkArrowUp from '@/assets/arrow-up.svg';
-import linkArrowDown from '@/assets/arrow-Down.svg';
+import linkArrowDown from '@/assets/arrow-down.svg';
 
 export const CategoryCollapse: FC = () => {
   const [openCategory, setOpenCategory] = useState(true);
