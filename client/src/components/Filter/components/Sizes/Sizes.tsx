@@ -9,7 +9,7 @@ import { Collapse, useTheme } from '@mui/material';
 import { useMediaQuery } from '@mui/material';
 import { useState } from 'react';
 import linkArrowUp from '@/assets/arrow-up.svg';
-import linkArrowDown from '@/assets/arrow-Down.svg';
+import linkArrowDown from '@/assets/arrow-down.svg';
 
 export const Sizes: FC = () => {
   const dispatch = useAppDispatch();

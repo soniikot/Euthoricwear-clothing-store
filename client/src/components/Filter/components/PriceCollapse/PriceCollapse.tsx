@@ -8,7 +8,7 @@ import { useAppSelector } from '@/app/hooks';
 import { RootState } from '@/app/store';
 import { setPriceRange } from '@/features/filter/filterSlice';
 import linkArrowUp from '@/assets/arrow-up.svg';
-import linkArrowDown from '@/assets/arrow-Down.svg';
+import linkArrowDown from '@/assets/arrow-down.svg';
 import { Slider } from '@mui/material';
 
 export const PriceCollapse: FC = () => {
