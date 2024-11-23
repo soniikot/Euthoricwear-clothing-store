@@ -9,6 +9,7 @@ module.exports = [
     config: {
       origin: [
         "http://62.72.5.244:5173",
+        "http://62.72.5.244:8000",
         "http://localhost:5173",
         "http://zkg4g80ok4ss00ok8o4kwo84.62.72.5.244.sslip.io",
       ],
