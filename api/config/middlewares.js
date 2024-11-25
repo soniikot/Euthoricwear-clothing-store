@@ -13,7 +13,7 @@ module.exports = [
         "http://62.72.5.244:8000",
         "http://zkg4g80ok4ss00ok8o4kwo84.62.72.5.244.sslip.io",
       ],
-      headers: ["authorization", "content-yype", "accept"],
+      headers: ["authorization", "content-type", "accept"],
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       credentials: true,
     },
