@@ -13,6 +13,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ProductData } from '@/types/interfaces';
 import { RootState } from '@/app/store';
+
 export interface ProductsTypeProps {
   numberOfProducts: number;
   isProductPage?: boolean;
@@ -26,6 +27,7 @@ export const Products: FC<ProductsTypeProps> = ({
   const products = useAppSelector(selectProducts);
   const { faves } = useAppSelector((state: RootState) => state.faves);
   const dispatch = useAppDispatch();
+  console.log(products[0].id);
 
   const handleToggleFavorite = (product: any) => {
     const favoriteProduct = {
@@ -60,7 +62,7 @@ export const Products: FC<ProductsTypeProps> = ({
             })}
           >
             {products.slice(0, numberOfProducts).map((product) => (
-              <Link to={`/product/${product.id - 1}`} key={product.id - 1}>
+              <Link to={`/product/${product.id}`} key={product.id}>
                 <div key={product.id} className={style.card}>
                   <button
                     className={clsx(style.favorites_button, {

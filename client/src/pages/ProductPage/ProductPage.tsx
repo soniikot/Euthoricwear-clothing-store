@@ -14,26 +14,36 @@ import clsx from 'clsx';
 export const ProductPage = () => {
   const { id: idString } = useParams();
   const id = Number(idString);
+
   const { products } = useAppSelector((state: RootState) => state.products);
 
   const [selectedImg, setSelectedImg] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    if (!products || products.length === 0) {
+    if (!products || products.length === 0 || isNaN(id)) {
       return;
     }
-    const initialImage =
-      import.meta.env.VITE_API_UPLOAD_URL +
-      products[id].attributes.img.data.attributes.url;
-    setSelectedImg(initialImage);
+
+    const product = products.find((prod) => prod.id === id);
+    console.log(products);
+    if (product) {
+      const initialImage =
+        import.meta.env.VITE_API_UPLOAD_URL +
+        product.attributes.img.data.attributes.url;
+      setSelectedImg(initialImage);
+    }
   }, [products, id]);
+
+  if (!products || products.length === 0 || isNaN(id)) {
+    return <div>Product not found</div>;
+  }
 
   return (
     <>
       <div className={style.wrapper}>
         <div className={style.images}>
           <div className={style.side_images}>
-            {products && products.length > 0 && (
+            {products.length > 0 && (
               <img
                 src={
                   import.meta.env.VITE_API_UPLOAD_URL +
@@ -72,9 +82,7 @@ export const ProductPage = () => {
             />
           </div>
           <div className={style.photo_wrapper}>
-            {products.length > 0 && (
-              <img src={selectedImg} className={style.image} />
-            )}
+            {selectedImg && <img src={selectedImg} className={style.image} />}
           </div>
         </div>
         <ProductsDescription id={id} />
