@@ -24,17 +24,29 @@ export const ProductPage = () => {
       return;
     }
 
+    // Find the product by ID
     const product = products.find((prod) => prod.id === id);
-    console.log(products);
-    if (product) {
+
+    // If the product exists and has image data, set the initial image
+    if (product && product.attributes && product.attributes.img) {
       const initialImage =
         import.meta.env.VITE_API_UPLOAD_URL +
         product.attributes.img.data.attributes.url;
       setSelectedImg(initialImage);
+    } else {
+      console.log(`Product with ID ${id} is missing required attributes.`);
     }
   }, [products, id]);
 
-  if (!products || products.length === 0 || isNaN(id)) {
+  // Check for missing or incomplete product data
+  const product = products.find((prod) => prod.id === id);
+  if (
+    !product ||
+    !product.attributes ||
+    !product.attributes.img ||
+    !product.attributes.img.data
+  ) {
+    console.error(`Product with ID ${id} is missing or incomplete.`);
     return <div>Product not found</div>;
   }
 
@@ -43,23 +55,24 @@ export const ProductPage = () => {
       <div className={style.wrapper}>
         <div className={style.images}>
           <div className={style.side_images}>
-            {products.length > 0 && (
+            {/* Loop through the images and display the selected one */}
+            {product.attributes.img.data && (
               <img
                 src={
                   import.meta.env.VITE_API_UPLOAD_URL +
-                  products[id].attributes.img.data.attributes.url
+                  product.attributes.img.data.attributes.url
                 }
-                alt="Raven Hoodie"
+                alt={product.attributes.title}
                 className={clsx(style.image, {
                   [style.selected_image]:
                     selectedImg ===
                     import.meta.env.VITE_API_UPLOAD_URL +
-                      products[id].attributes.img.data.attributes.url,
+                      product.attributes.img.data.attributes.url,
                 })}
                 onClick={(_e) =>
                   setSelectedImg(
                     import.meta.env.VITE_API_UPLOAD_URL +
-                      products[id].attributes.img.data.attributes.url
+                      product.attributes.img.data.attributes.url
                   )
                 }
               />

@@ -31,7 +31,10 @@ export const ProductsDescription: FC<ProductDescriptionProps> = ({ id }) => {
   const handleSizeSelect = (size: string) => {
     setSelectedSize(size);
   };
+
   const dispatch = useAppDispatch();
+
+  const product = products.find((prod) => prod.id === id);
 
   const handleAddToCart = () => {
     if (!selectedSize) {
@@ -45,19 +48,28 @@ export const ProductsDescription: FC<ProductDescriptionProps> = ({ id }) => {
       });
       return;
     }
-    dispatch(
-      addToCart({
-        id: id,
-        quantity: 1,
-        title: products[id].attributes.title,
-        price: products[id].attributes.price,
-        img: products[id].attributes.img.data.attributes.url,
-        color: products[id].attributes.color,
-        size: selectedSize,
-      })
-    );
-    toast.success('Product added to cart!');
+
+    if (product) {
+      dispatch(
+        addToCart({
+          id: product.id,
+          quantity: 1,
+          title: product.attributes.title,
+          price: product.attributes.price,
+          img: product.attributes.img.data.attributes.url,
+          color: product.attributes.color,
+          size: selectedSize,
+        })
+      );
+      toast.success('Product added to cart!');
+    } else {
+      toast.error('Product not found!');
+    }
   };
+
+  if (!product) {
+    return <div>Product not found</div>;
+  }
 
   return (
     <>
@@ -65,26 +77,21 @@ export const ProductsDescription: FC<ProductDescriptionProps> = ({ id }) => {
         <h5>
           <Links id={id} />
         </h5>
-        <h2 className={style.title}>
-          {products.length > 0 && products[id].attributes.title}
-        </h2>
+        <h2 className={style.title}>{product && product.attributes.title}</h2>
         <div className={style.rating}>
           <img src={stars} alt="stars" />
-          <h5 className={style.comments}> 3.5 </h5>
+          <h5 className={style.comments}>3.5</h5>
           <img src={message} alt="comment" />
-
-          <h5 className={style.comments}>120 comments</h5>
         </div>
 
         <h5 className={style.size_guide}>
           <span className={style.dark_text}>Select Size</span>
           <a href="#">Size Guide</a>
-          <i className="fas fa-arrow-right"></i>
         </h5>
 
         <div className={style.sizes}>
-          {products.length > 0 &&
-            products[id].attributes.size.map((size: string) => (
+          {product &&
+            product.attributes.size.map((size: string) => (
               <button
                 key={size}
                 className={clsx(style.size_button, {
@@ -105,7 +112,7 @@ export const ProductsDescription: FC<ProductDescriptionProps> = ({ id }) => {
             buttonColor="purple"
           />
           <TextButton
-            text={`$${products.length > 0 && products[id].attributes.price}`}
+            text={`$${product && product.attributes.price}`}
             buttonColor="white"
           />
         </div>
