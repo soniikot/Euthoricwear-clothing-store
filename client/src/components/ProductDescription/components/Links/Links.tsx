@@ -10,7 +10,7 @@ interface LinksWithProps {
 export const Links: FC<LinksWithProps> = ({ id }) => {
   const { products } = useAppSelector((state: RootState) => state.products);
 
-  const product = products[id];
+  const product = products.find((prod) => prod.id === id);
 
   if (!product) {
     return <h5>Product not found</h5>;

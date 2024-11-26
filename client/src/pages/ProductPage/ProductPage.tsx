@@ -20,14 +20,12 @@ export const ProductPage = () => {
   const [selectedImg, setSelectedImg] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    if (!products || products.length === 0 || isNaN(id)) {
+    if (!products || products.length === 0) {
       return;
     }
 
-    // Find the product by ID
     const product = products.find((prod) => prod.id === id);
 
-    // If the product exists and has image data, set the initial image
     if (product && product.attributes && product.attributes.img) {
       const initialImage =
         import.meta.env.VITE_API_UPLOAD_URL +
@@ -38,7 +36,6 @@ export const ProductPage = () => {
     }
   }, [products, id]);
 
-  // Check for missing or incomplete product data
   const product = products.find((prod) => prod.id === id);
   if (
     !product ||
@@ -55,7 +52,6 @@ export const ProductPage = () => {
       <div className={style.wrapper}>
         <div className={style.images}>
           <div className={style.side_images}>
-            {/* Loop through the images and display the selected one */}
             {product.attributes.img.data && (
               <img
                 src={

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import style from './styles.module.scss';
 import message from '@/assets/message.svg';
 import stars from '@/assets/3and5stars.png';
-import { TextButton } from '@/shared/components/TextButton/TextButton';
 import { IconButtonWithText } from '@/shared/components/IconButtonWIthText/IconButtonWithText';
 import cart from '@/assets/shopping-cart-white.svg';
 import cc from '@/assets/cc.svg';
@@ -75,7 +74,7 @@ export const ProductsDescription: FC<ProductDescriptionProps> = ({ id }) => {
     <>
       <div className={style.details}>
         <h5>
-          <Links id={id} />
+          <Links id={Number(id)} />
         </h5>
         <h2 className={style.title}>{product && product.attributes.title}</h2>
         <div className={style.rating}>
@@ -86,7 +85,6 @@ export const ProductsDescription: FC<ProductDescriptionProps> = ({ id }) => {
 
         <h5 className={style.size_guide}>
           <span className={style.dark_text}>Select Size</span>
-          <a href="#">Size Guide</a>
         </h5>
 
         <div className={style.sizes}>
@@ -103,6 +101,9 @@ export const ProductsDescription: FC<ProductDescriptionProps> = ({ id }) => {
               </button>
             ))}
         </div>
+        <div>
+          <h3>{`$${product && product.attributes.price}`}</h3>
+        </div>
 
         <div className={style.buttons}>
           <IconButtonWithText
@@ -111,10 +112,7 @@ export const ProductsDescription: FC<ProductDescriptionProps> = ({ id }) => {
             icon={cart}
             buttonColor="purple"
           />
-          <TextButton
-            text={`$${product && product.attributes.price}`}
-            buttonColor="white"
-          />
+          <div></div>
         </div>
 
         <div className={style.features}>

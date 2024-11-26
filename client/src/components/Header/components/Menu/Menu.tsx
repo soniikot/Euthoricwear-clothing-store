@@ -1,31 +1,38 @@
+import { useState, useEffect, FC } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import style from './styles.module.scss';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { FC, useState, useEffect } from 'react';
 import { useAppDispatch } from '@/app/hooks';
-import { setGender } from '@/features/filter/filterSlice';
-import { resetFilter } from '@/features/filter/filterSlice';
+import { setGender, resetFilter } from '@/features/filter/filterSlice';
 
 export const Menu: FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  const [activeGender, setActiveGender] = useState('');
+
+  const [activeGender, setActiveGender] = useState<string>('');
 
   useEffect(() => {
-    return () => {
+    const queryParams = new URLSearchParams(location.search);
+    const genderFromURL = queryParams.get('gender') || '';
+
+    if (genderFromURL) {
+      setActiveGender(genderFromURL);
+      dispatch(setGender(genderFromURL));
+    } else if (location.pathname !== '/products/') {
       setActiveGender('');
-    };
-  }, []);
+    }
+  }, [location.pathname, location.search, dispatch]);
 
   const handleGenderChange = (gender: string) => {
-    navigate('/products/');
+    navigate(`/products/?gender=${gender}`);
     dispatch(setGender(gender));
     setActiveGender(gender);
   };
 
   const handleShopAllClick = () => {
     dispatch(resetFilter());
-    setActiveGender('all');
+    setActiveGender('');
+    navigate('/products/');
   };
 
   const isActive = (path: string) => {
@@ -35,7 +42,7 @@ export const Menu: FC = () => {
   return (
     <ul className={style.header_menu}>
       <li
-        className={`${style.link} ${isActive('/products/') && activeGender === 'all' ? style.active : ''}`}
+        className={`${style.link} ${isActive('/products/') && activeGender === '' ? style.active : ''}`}
       >
         <Link to={'/products/'} onClick={handleShopAllClick}>
           Shop All

@@ -14,11 +14,6 @@ export const Header: FC = () => {
   const { pathname } = useLocation();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (pathname !== '/products/') {
-      dispatch(resetFilter());
-    }
-  }, [pathname]);
   return (
     <div className="container">
       <header className={style.header}>

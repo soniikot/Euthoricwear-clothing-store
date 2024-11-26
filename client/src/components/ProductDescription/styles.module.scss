@@ -51,10 +51,12 @@
   align-items: center;
   flex-wrap: wrap;
 }
+
 .buttons {
   display: flex;
   gap: 30px;
   padding-bottom: 30px;
+  margin-top: 20px;
   border-bottom: 1px solid $--grey-border-color;
 }
 

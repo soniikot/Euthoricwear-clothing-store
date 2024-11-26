@@ -27,7 +27,6 @@ export const Products: FC<ProductsTypeProps> = ({
   const products = useAppSelector(selectProducts);
   const { faves } = useAppSelector((state: RootState) => state.faves);
   const dispatch = useAppDispatch();
-  console.log(products[0].id);
 
   const handleToggleFavorite = (product: any) => {
     const favoriteProduct = {
