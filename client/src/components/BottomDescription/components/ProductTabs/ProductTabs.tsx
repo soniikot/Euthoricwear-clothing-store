@@ -21,8 +21,7 @@ export const ProductTabs: FC = () => {
             onChange={handleTabChange}
             textColor="secondary"
             indicatorColor="secondary"
-            variant="scrollable" // Makes tabs scrollable on small screens
-            scrollButtons="auto" // Enable scrolling buttons on small screens
+            variant="scrollable"
           >
             <Tab label="Description" value="1" />
             <Tab label="User comments" value="2" />
@@ -33,7 +32,7 @@ export const ProductTabs: FC = () => {
           <Grid item xs={12}>
             <TabPanel
               value="1"
-              sx={{ width: '100%', height: 350, overflowY: 'auto' }}
+              sx={{ width: '70%', height: 310, overflowY: 'auto' }}
             >
               100% Bio-washed Cotton - makes the fabric extra soft & silky.
               Flexible ribbed crew neck. Precisely stitched with no pilling & no
