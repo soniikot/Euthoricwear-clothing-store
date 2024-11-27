@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const sharp = require("sharp");
 
-const uploadDir = path.join(__dirname, "../public/uploads");
+const uploadDir = path.join(__dirname, "../../client/src/assets/");
 
 const optimizedDir = path.join(uploadDir, "optimized");
 
