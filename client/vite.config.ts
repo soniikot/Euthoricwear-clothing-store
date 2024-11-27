@@ -1,10 +1,30 @@
 import { defineConfig } from 'vitest/config';
 import react from '@vitejs/plugin-react';
 import path from 'path';
+import ViteImagemin from 'vite-plugin-imagemin';
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    ViteImagemin({
+      pngquant: {
+        quality: [0.6, 0.8],
+      },
+      mozjpeg: {
+        quality: 75,
+      },
+      svgo: {
+        plugins: [
+          {
+            removeViewBox: false,
+          },
+        ],
+      },
+      webp: {
+        quality: 75,
+      },
+    }),
+  ],
   server: {
     open: false,
   },

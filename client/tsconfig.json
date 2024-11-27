@@ -6,7 +6,6 @@
     "module": "ESNext",
     "skipLibCheck": true,
 
-
     /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
@@ -28,7 +27,8 @@
       "@/*": ["src/*"],
       "@components/*": ["src/components/*"],
       "@assets/*": ["src/assets/*"],
-      "@pages/*": ["src/pages/*"]
+      "@pages/*": ["src/pages/*"],
+      "@images/*": ["src/assets/images/*"]
     }
   },
   "include": ["src"],
