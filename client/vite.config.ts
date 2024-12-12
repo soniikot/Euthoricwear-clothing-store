@@ -27,6 +27,10 @@ export default defineConfig({
   ],
   server: {
     open: false,
+    https: {
+      key: './clothingstore-privateKey.key',
+      cert: './clothingstore.crt',
+    },
   },
   test: {
     globals: true,

@@ -4,8 +4,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite --host ",
-    "start": "vite --no-open",
+    "dev": "HTTPS=true&&vite --host ",
+    "start": "HTTPS=true&&vite --no-open",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "test": "vitest run",

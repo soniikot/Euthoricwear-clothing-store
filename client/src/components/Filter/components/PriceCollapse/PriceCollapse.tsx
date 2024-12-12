@@ -34,15 +34,18 @@ export const PriceCollapse: FC = () => {
   ) => {
     let newValue = [...priceRange];
 
-    const inputValue =
-      event.target.value === '' ? 0 : Number(event.target.value);
+    // const inputValue =
+    //   event.target.value === '' ? 0 : Number(event.target.value);
 
-    newValue[index] = inputValue;
+    newValue[index] = Number(event.target.value);
 
     if (newValue[0] <= newValue[1]) {
       dispatch(setPriceRange(newValue));
     }
   };
+
+  //
+  // useState()
 
   return (
     <>
