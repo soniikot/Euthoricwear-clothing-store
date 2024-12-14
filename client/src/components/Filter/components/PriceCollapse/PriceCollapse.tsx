@@ -33,25 +33,15 @@ export const PriceCollapse: FC = () => {
     event: ChangeEvent<HTMLInputElement>
   ) => {
     let newValue = [...priceRange];
-    const prevValue = priceRange[index];
-    const inputValue =
+
+    newValue[index] =
       event.target.value === '' ? '' : Number(event.target.value);
-
-    // Check if value is valid (either empty string or a valid number)
-    const isValidValue =
-      inputValue === '' || (!isNaN(Number(inputValue)) && inputValue >= 0);
-
-    newValue[index] = isValidValue ? inputValue : prevValue;
 
     if (newValue[0] <= newValue[1]) {
       dispatch(setPriceRange(newValue));
-    } else {
-      // If new values are invalid, revert to previous state
-      dispatch(setPriceRange(priceRange));
     }
   };
 
-  // Convert any empty strings to numbers for the slider
   const sliderValue = priceRange.map((val) => (val === '' ? 0 : val));
 
   return (
