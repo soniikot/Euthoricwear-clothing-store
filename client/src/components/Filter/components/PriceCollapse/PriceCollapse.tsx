@@ -33,19 +33,26 @@ export const PriceCollapse: FC = () => {
     event: ChangeEvent<HTMLInputElement>
   ) => {
     let newValue = [...priceRange];
+    const prevValue = priceRange[index];
+    const inputValue =
+      event.target.value === '' ? '' : Number(event.target.value);
 
-    // const inputValue =
-    //   event.target.value === '' ? 0 : Number(event.target.value);
+    // Check if value is valid (either empty string or a valid number)
+    const isValidValue =
+      inputValue === '' || (!isNaN(Number(inputValue)) && inputValue >= 0);
 
-    newValue[index] = Number(event.target.value);
+    newValue[index] = isValidValue ? inputValue : prevValue;
 
     if (newValue[0] <= newValue[1]) {
       dispatch(setPriceRange(newValue));
+    } else {
+      // If new values are invalid, revert to previous state
+      dispatch(setPriceRange(priceRange));
     }
   };
 
-  //
-  // useState()
+  // Convert any empty strings to numbers for the slider
+  const sliderValue = priceRange.map((val) => (val === '' ? 0 : val));
 
   return (
     <>
@@ -60,7 +67,7 @@ export const PriceCollapse: FC = () => {
         <div className={style.slider}>
           <div style={{ width: '225px', padding: '5px' }}>
             <Slider
-              value={priceRange}
+              value={sliderValue}
               onChange={(_event, value) => handlePriceChanges(value)}
               color="secondary"
               min={0}
@@ -74,6 +81,7 @@ export const PriceCollapse: FC = () => {
                 onChange={(event) => handleInputChange(0, event)}
                 min={0}
                 max={priceRange[1]}
+                style={{ width: '60px', textAlign: 'center' }}
               />
               <input
                 className={style.button}
@@ -82,6 +90,7 @@ export const PriceCollapse: FC = () => {
                 onChange={(event) => handleInputChange(1, event)}
                 min={priceRange[0]}
                 max={200}
+                style={{ width: '60px', textAlign: 'center' }}
               />
             </div>
           </div>

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 interface FilterState {
   category: string;
-  price: number[];
+  price: (number | '')[];
   color: string;
   size: string;
   gender: string;
