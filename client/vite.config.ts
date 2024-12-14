@@ -8,10 +8,11 @@ export default defineConfig({
     host: true,
     port: 5173,
     proxy: {
-      '/': {
+      '/api': {
         target: 'https://euphoricwear.shop',
         changeOrigin: true,
         secure: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
   },
