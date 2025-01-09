@@ -6,7 +6,6 @@ import { configureStore } from '@reduxjs/toolkit';
 import cartReducer from '../features/cart/cartSlice';
 import userReducer from '../features/user/userSlice';
 import testImage from '../assets/sample1.jpg';
-
 // Test store setup
 const createTestStore = (preloadedState = {}) => {
   return configureStore({
@@ -107,6 +106,54 @@ describe('Cart Component', () => {
       fireEvent.click(deleteButton);
 
       expect(screen.queryByText('Second Product')).not.toBeInTheDocument();
+    });
+
+    test('updates quantity in the DOM when increment and decrement buttons are clicked', () => {
+      renderWithProviders({
+        cart: { cart: cartItems },
+        user: { username: '' },
+      });
+      const productRow = screen
+        .getByText('Second Product')
+        ?.closest('.container');
+      if (!productRow) {
+        throw new Error('Product row not found');
+      }
+      const quantityContainer = productRow.querySelector(
+        '._quantity_204c46 > ._wrapper_5508f4'
+      );
+      if (!quantityContainer) {
+        throw new Error('Quantity container not found');
+      }
+      if (!quantityContainer) {
+        throw new Error('Quantity container not found');
+      }
+
+      const quantityDisplay =
+        quantityContainer.querySelector('div:nth-child(2)');
+      const incrementButton =
+        quantityContainer.querySelector('button:last-child');
+      const decrementButton =
+        quantityContainer.querySelector('button:first-child');
+
+      if (!quantityDisplay) {
+        throw new Error('Quantity display not found');
+      }
+      if (!incrementButton) {
+        throw new Error('Increment button not found');
+      }
+      if (!decrementButton) {
+        throw new Error('Decrement button not found');
+      }
+
+      expect(quantityDisplay.textContent).toBe('2');
+
+      fireEvent.click(incrementButton);
+
+      expect(quantityDisplay.textContent).toBe('3');
+
+      fireEvent.click(decrementButton);
+      expect(quantityDisplay.textContent).toBe('2');
     });
   });
 });
