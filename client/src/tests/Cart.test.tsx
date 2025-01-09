@@ -5,6 +5,7 @@ import { Cart } from '../pages/Cart/Cart';
 import { configureStore } from '@reduxjs/toolkit';
 import cartReducer from '../features/cart/cartSlice';
 import userReducer from '../features/user/userSlice';
+import testImage from '../assets/sample1.jpg';
 
 // Test store setup
 const createTestStore = (preloadedState = {}) => {
@@ -29,55 +30,58 @@ const renderWithProviders = (preloadedState = {}) => {
   );
 };
 
-test('renders empty cart message when cart is empty', () => {
-  renderWithProviders({
-    cart: { cart: [] },
-    user: { username: '' },
-  });
+// Test data preparation
+const sampleCartItem = {
+  id: 1,
+  title: 'Test Product',
+  price: 29.99,
+  img: testImage,
+  quantity: 1,
+};
 
-  expect(
-    screen.getByText(/You haven't chosen anything yet/i)
-  ).toBeInTheDocument();
-});
+const SINGLE_ITEM_PRICE = /29.99/i;
+const MULTIPLE_ITEMS_TOTAL = /99.94/i;
+
+const cartItems = [
+  { id: 1, title: 'Test Product', price: 29.99, img: testImage, quantity: 1 },
+  { id: 2, title: 'Second Product', price: 19.99, img: testImage, quantity: 2 },
+  { id: 3, title: 'Third Product', price: 9.99, img: testImage, quantity: 3 },
+];
 
 describe('Cart Component', () => {
-  // Sample cart item for testing
-  const sampleCartItem = {
-    id: 1,
-    title: 'Test Product',
-    price: 29.99,
-    img: '/test.jpg',
-    quantity: 1,
-  };
+  describe('when the cart is empty', () => {
+    test('renders empty cart message', () => {
+      renderWithProviders({
+        cart: { cart: [] },
+        user: { username: '' },
+      });
 
-  test('displays correct total amount for single item', () => {
-    renderWithProviders({
-      cart: { cart: [sampleCartItem] },
-      user: { username: '' },
+      const emptyCartMessage = screen.getByText(
+        /You haven't chosen anything yet/i
+      );
+      expect(emptyCartMessage).toBeInTheDocument();
+    });
+  });
+
+  describe('when the cart has items', () => {
+    test('displays correct total amount for single item', () => {
+      renderWithProviders({
+        cart: { cart: [sampleCartItem] },
+        user: { username: '' },
+      });
+
+      const totalAmount = screen.getAllByText(SINGLE_ITEM_PRICE);
+      expect(totalAmount).toHaveLength(4);
     });
 
-    expect(screen.getAllByText(/29.99/i)).toHaveLength(4);
+    test('displays correct total amount for multiple items', () => {
+      renderWithProviders({
+        cart: { cart: cartItems },
+        user: { username: '' },
+      });
+
+      const totalAmount = screen.getAllByText(MULTIPLE_ITEMS_TOTAL);
+      expect(totalAmount).toHaveLength(2);
+    });
   });
-});
-
-test('displays correct total amount for multiple items', () => {
-  const sampleCartItem = {
-    id: 1,
-    name: 'Sample Item',
-    quantity: 1,
-    price: 29.99,
-  };
-
-  const cartItems = [
-    sampleCartItem,
-    { ...sampleCartItem, id: 2, quantity: 2, price: 19.99 },
-    { ...sampleCartItem, id: 3, quantity: 3, price: 9.99 },
-  ];
-  // Total should be: 29.99 + (19.99 * 2) + (9.99 * 3) = 89.94
-
-  renderWithProviders({
-    cart: { cart: cartItems },
-    user: { username: '' },
-  });
-  expect(screen.getAllByText(/99.94/i)).toHaveLength(2);
 });
