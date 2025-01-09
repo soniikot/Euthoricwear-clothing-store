@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { Cart } from '../pages/Cart/Cart';
@@ -82,6 +82,31 @@ describe('Cart Component', () => {
 
       const totalAmount = screen.getAllByText(MULTIPLE_ITEMS_TOTAL);
       expect(totalAmount).toHaveLength(2);
+    });
+
+    test('removes an item from the cart', () => {
+      renderWithProviders({
+        cart: { cart: cartItems },
+        user: { username: '' },
+      });
+
+      const productRow = screen
+        .getByText('Second Product')
+        ?.closest('.container');
+      if (!productRow) {
+        throw new Error('Product row not found');
+      }
+      const deleteImage = productRow.querySelector('img[alt="delete"]');
+      if (!deleteImage) {
+        throw new Error('Delete image not found');
+      }
+      const deleteButton = deleteImage.parentElement;
+      if (!deleteButton) {
+        throw new Error('Delete button not found');
+      }
+      fireEvent.click(deleteButton);
+
+      expect(screen.queryByText('Second Product')).not.toBeInTheDocument();
     });
   });
 });
