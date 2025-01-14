@@ -62,7 +62,11 @@ export const Products: FC<ProductsTypeProps> = ({
           >
             {products.slice(0, numberOfProducts).map((product) => (
               <Link to={`/product/${product.id}`} key={product.id}>
-                <div key={product.id} className={style.card}>
+                <div
+                  key={product.id}
+                  className={style.card}
+                  data-testid="product-card"
+                >
                   <button
                     className={clsx(style.favorites_button, {
                       [style.active]: faves.some(
