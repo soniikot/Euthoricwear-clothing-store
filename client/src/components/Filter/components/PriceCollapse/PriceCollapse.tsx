@@ -1,7 +1,7 @@
 import { Collapse, useTheme } from '@mui/material';
 import { useMediaQuery } from '@mui/material';
 import { useState } from 'react';
-import { FC, ChangeEvent } from 'react';
+import { FC } from 'react';
 import style from './styles.module.scss';
 import { useAppDispatch } from '@/app/hooks';
 import { useAppSelector } from '@/app/hooks';
@@ -16,7 +16,6 @@ export const PriceCollapse: FC = () => {
   const dispatch = useAppDispatch();
 
   const [openPrice, setOpenPrice] = useState(true);
-
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -24,24 +23,7 @@ export const PriceCollapse: FC = () => {
     if (!Array.isArray(newValue)) {
       throw new Error('Price range is not a number array');
     }
-
     dispatch(setPriceRange(newValue));
-  };
-
-  const handleInputChange = (
-    index: number,
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    let newValue = [...priceRange];
-
-    const inputValue =
-      event.target.value === '' ? 0 : Number(event.target.value);
-
-    newValue[index] = inputValue;
-
-    if (newValue[0] <= newValue[1]) {
-      dispatch(setPriceRange(newValue));
-    }
   };
 
   return (
@@ -61,25 +43,12 @@ export const PriceCollapse: FC = () => {
               onChange={(_event, value) => handlePriceChanges(value)}
               color="secondary"
               min={0}
-              max={200}
+              max={300}
             />
             <div className={style.range}>
-              <input
-                className={style.button}
-                type="number"
-                value={priceRange[0]}
-                onChange={(event) => handleInputChange(0, event)}
-                min={0}
-                max={priceRange[1]}
-              />
-              <input
-                className={style.button}
-                type="number"
-                value={priceRange[1]}
-                onChange={(event) => handleInputChange(1, event)}
-                min={priceRange[0]}
-                max={200}
-              />
+              <span className={style.value}>${priceRange[0]}</span>
+
+              <span className={style.value}>${priceRange[1]}</span>
             </div>
           </div>
         </div>
