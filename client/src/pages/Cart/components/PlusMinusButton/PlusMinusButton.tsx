@@ -20,6 +20,7 @@ export const PlusMinusButton: FC<PlusMinusButtonProps> = ({ id, count }) => {
   return (
     <div className={style.wrapper}>
       <button
+        data-testid={`decrement-button-${id}`}
         className={style.button}
         onClick={() => {
           decrementCount(id);
@@ -27,8 +28,9 @@ export const PlusMinusButton: FC<PlusMinusButtonProps> = ({ id, count }) => {
       >
         -
       </button>
-      <div>{count}</div>
+      <div data-testid={`count-display-${id}`}>{count}</div>
       <button
+        data-testid={`increment-button-${id}`}
         className={style.button}
         onClick={() => {
           incrementCount(id);

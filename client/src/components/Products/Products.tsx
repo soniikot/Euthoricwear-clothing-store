@@ -62,7 +62,11 @@ export const Products: FC<ProductsTypeProps> = ({
           >
             {products.slice(0, numberOfProducts).map((product) => (
               <Link to={`/product/${product.id}`} key={product.id}>
-                <div key={product.id} className={style.card}>
+                <div
+                  key={product.id}
+                  className={style.card}
+                  data-testid="product-card"
+                >
                   <button
                     className={clsx(style.favorites_button, {
                       [style.active]: faves.some(
@@ -96,6 +100,7 @@ export const Products: FC<ProductsTypeProps> = ({
 
                   <div className={style.text_wrapper}>
                     <p
+                      data-testid="product-title"
                       className={clsx(style.title, {
                         [style.product_page_title]: isProductPage,
                       })}
@@ -113,6 +118,7 @@ export const Products: FC<ProductsTypeProps> = ({
                       className={clsx(style.price, {
                         [style.product_page_price]: isProductPage,
                       })}
+                      data-testid="product-price"
                     >
                       ${product.attributes.price}
                     </div>
