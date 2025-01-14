@@ -5,10 +5,10 @@ describe('Shopping Flow', () => {
 
   it('should display products on the products page', () => {
     cy.get('[data-testid="product-card"]').should('have.length.at.least', 1);
-    // cy.get('[data-testid="product-title"]').should('be.visible');
-    // cy.get('[data-testid="product-price"]').should('be.visible');
+    cy.get('[data-testid="product-title"]').should('be.visible');
+    cy.get('[data-testid="product-price"]').should('be.visible');
   });
-  /*
+
   it('should filter products by price range', () => {
     cy.get('[data-testid="price-slider"]').should('be.visible');
     cy.get('input[type="number"]').first().clear().type('50');
@@ -37,6 +37,6 @@ describe('Shopping Flow', () => {
     cy.get('[data-testid="cart-item"]').should('have.length.at.least', 1);
 
     // Proceed to checkout
-   // cy.get('[data-testid="checkout-button"]').click();
-  });*/
+    // cy.get('[data-testid="checkout-button"]').click();
+  });
 });

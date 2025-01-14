@@ -105,14 +105,13 @@ export const ProductsDescription: FC<ProductDescriptionProps> = ({ id }) => {
           <h3>{`$${product && product.attributes.price}`}</h3>
         </div>
 
-        <div className={style.buttons}>
+        <div className={style.buttons} data-testid="add-to-cart">
           <IconButtonWithText
             onClick={handleAddToCart}
             text="Add to cart"
             icon={cart}
             buttonColor="purple"
           />
-          <div></div>
         </div>
 
         <div className={style.features}>

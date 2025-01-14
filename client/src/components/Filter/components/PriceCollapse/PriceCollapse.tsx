@@ -55,7 +55,10 @@ export const PriceCollapse: FC = () => {
         style={isSmallScreen ? { backgroundColor: 'white' } : {}}
       >
         <div className={style.slider}>
-          <div style={{ width: '225px', padding: '5px' }}>
+          <div
+            data-testid="price-slider"
+            style={{ width: '225px', padding: '5px' }}
+          >
             <Slider
               value={priceRange}
               onChange={(_event, value) => handlePriceChanges(value)}
