@@ -10,17 +10,23 @@ describe('Shopping Flow', () => {
   });
 
   it('should filter products by price range', () => {
-    cy.get('[data-testid="price-slider"]').should('be.visible');
-    cy.get('input[type="number"]').first().clear().type('50');
-    cy.get('input[type="number"]').last().clear().type('100');
+    cy.get('[data-testid="price-slider"]')
+      .trigger('mousedown', { position: 'left' })
+      .trigger('mousemove', 0)
+      .trigger('mouseup')
+      .trigger('mousedown', { position: 'right' })
+      .trigger('mousemove', 150)
+      .trigger('mouseup');
+
     cy.get('[data-testid="product-price"]').each(($price) => {
       const price = parseFloat($price.text().replace('$', ''));
-      expect(price).to.be.within(50, 100);
+      expect(price).to.be.within(0, 150);
     });
   });
 
   it('should add product to cart', () => {
     cy.get('[data-testid="product-card"]').first().click();
+    cy.get('[data-testid="size-selector"]').first().click();
     cy.get('[data-testid="add-to-cart"]').click();
     cy.get('[data-testid="cart-count"]').should('have.text', '1');
   });

@@ -36,7 +36,7 @@ export const PriceCollapse: FC = () => {
         in={openPrice}
         style={isSmallScreen ? { backgroundColor: 'white' } : {}}
       >
-        <div className={style.slider}>
+        <div className={style.slider} data-testid="price-slider">
           <div style={{ width: '225px', padding: '5px' }}>
             <Slider
               value={priceRange}
