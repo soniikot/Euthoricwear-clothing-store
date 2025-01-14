@@ -18,7 +18,11 @@ export const DesktopCartItem: FC<DesktopCartItemProps> = ({
       {cart &&
         cart.length > 0 &&
         cart.map((product) => (
-          <div key={product.id} className={clsx(style.grid_row, 'container')}>
+          <div
+            key={product.id}
+            className={clsx(style.grid_row, 'container')}
+            data-testid="cart-item"
+          >
             <div className={style.description}>
               <div className={style.image_container}>
                 <img

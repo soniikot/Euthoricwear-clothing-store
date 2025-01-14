@@ -87,11 +87,12 @@ export const ProductsDescription: FC<ProductDescriptionProps> = ({ id }) => {
           <span className={style.dark_text}>Select Size</span>
         </h5>
 
-        <div className={style.sizes}>
+        <div className={style.sizes} data-testid="size-buttons">
           {product &&
             product.attributes.size.map((size: string) => (
               <button
                 key={size}
+                data-testid={`size-button-${size}`}
                 className={clsx(style.size_button, {
                   [style.selected_button]: size === selectedSize,
                 })}

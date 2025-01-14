@@ -12,10 +12,10 @@ describe('Shopping Flow', () => {
   it('should filter products by price range', () => {
     cy.get('[data-testid="price-slider"]')
       .trigger('mousedown', { position: 'left' })
-      .trigger('mousemove', 0)
+      .trigger('mousemove', { clientX: 0, clientY: 0 })
       .trigger('mouseup')
       .trigger('mousedown', { position: 'right' })
-      .trigger('mousemove', 150)
+      .trigger('mousemove', { clientX: 150, clientY: 0 })
       .trigger('mouseup');
 
     cy.get('[data-testid="product-price"]').each(($price) => {
@@ -26,23 +26,10 @@ describe('Shopping Flow', () => {
 
   it('should add product to cart', () => {
     cy.get('[data-testid="product-card"]').first().click();
-    cy.get('[data-testid="size-selector"]').first().click();
-    cy.get('[data-testid="add-to-cart"]').click();
-    cy.get('[data-testid="cart-count"]').should('have.text', '1');
-  });
-
-  it('should complete checkout process', () => {
-    // Add item to cart first
-    cy.get('[data-testid="product-card"]').first().click();
-    cy.get('[data-testid="add-to-cart"]').click();
-
-    // Go to cart
+    cy.get('[data-testid="size-buttons"]').find('button').first().click();
+    cy.get('[data-testid="add-to-cart"]').find('button').click();
+    cy.get('.Toastify__toast-body').should('contain', 'Product added to cart');
     cy.get('[data-testid="cart-icon"]').click();
-
-    // Verify cart items
     cy.get('[data-testid="cart-item"]').should('have.length.at.least', 1);
-
-    // Proceed to checkout
-    // cy.get('[data-testid="checkout-button"]').click();
   });
 });

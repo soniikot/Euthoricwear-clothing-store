@@ -56,11 +56,9 @@ export const Cart: FC = () => {
             <div className={style.register}>
               <p className={style.grey}>
                 Already registered?
-                <a href="" className="purple">
-                  <span className="purple">
-                    <Link to="/login"> Please login here</Link>
-                  </span>
-                </a>
+                <span className="purple">
+                  <Link to="/login"> Please login here</Link>
+                </span>
               </p>
             </div>
           )}

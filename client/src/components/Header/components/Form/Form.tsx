@@ -38,7 +38,11 @@ export const Form: FC = () => {
           isActive={isActiveLogin}
         />
       </Link>
-      <Link className={style.cart_icon_wrapper} to="/cart">
+      <Link
+        className={style.cart_icon_wrapper}
+        data-testid="cart-icon"
+        to="/cart"
+      >
         <IconButton
           icon={isActiveCart ? shoppingCartWhite : shoppingCart}
           isActive={isActiveCart}
