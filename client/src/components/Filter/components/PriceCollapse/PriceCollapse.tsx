@@ -26,6 +26,8 @@ export const PriceCollapse: FC = () => {
     dispatch(setPriceRange(newValue));
   };
 
+  const sliderValue = priceRange.map((val) => (val === '' ? 0 : val));
+
   return (
     <>
       <div className={style.header} onClick={() => setOpenPrice(!openPrice)}>
