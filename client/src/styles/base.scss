@@ -1,6 +1,8 @@
 .container {
   max-width: 1240px;
-  margin: 0 auto;
+  display: block;
+  margin: auto;
+  padding-inline: 20px;
 }
 
 @media (max-width: $medium) {
