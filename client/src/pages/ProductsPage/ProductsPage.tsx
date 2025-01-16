@@ -58,8 +58,9 @@ export const ProductsPage: FC = () => {
           elegance. At Euphoria, you’ll find the perfect pieces for your
           wardrobe that reflect the latest trends and timeless style.
         </p>
-
-        <SectionTitle text="Buy men and women's Clothing at Best Price" />
+        <div className={style.titleContainer}>
+          <SectionTitle text="Buy men and women's Clothing at Best Price" />
+        </div>
       </div>
 
       <Table />

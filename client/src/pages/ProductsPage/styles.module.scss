@@ -38,3 +38,11 @@
     flex-direction: column;
   }
 }
+
+.titleContainer {
+  display: block;
+
+  @media (max-width: $small) {
+    display: none;
+  }
+}
