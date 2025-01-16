@@ -1,45 +1,17 @@
-import { defineConfig } from 'vitest/config';
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
-import ViteImagemin from 'vite-plugin-imagemin';
 
 export default defineConfig({
-  plugins: [
-    react(),
-    ViteImagemin({
-      pngquant: {
-        quality: [0.6, 0.8],
-      },
-      mozjpeg: {
-        quality: 75,
-      },
-      svgo: {
-        plugins: [
-          {
-            removeViewBox: false,
-          },
-        ],
-      },
-      webp: {
-        quality: 75,
-      },
-    }),
-  ],
+  plugins: [react()],
   server: {
-    open: false,
-  },
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: 'src/setupTests',
-    mockReset: true,
+    host: true,
+    port: 5173,
   },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
       '@assets': path.resolve(__dirname, './src/assets'),
-      '@components': path.resolve(__dirname, './src/components'),
-      '@pages': path.resolve(__dirname, './src/pages'),
     },
   },
 });

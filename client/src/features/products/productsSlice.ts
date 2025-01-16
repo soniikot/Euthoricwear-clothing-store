@@ -81,11 +81,13 @@ const filterSearch = (searchQuery: string, product: ProductData) => {
     .includes(searchQuery.trim().toLowerCase());
 };
 
-const filterPriceType = (filterPrice: number[], product: ProductData) => {
-  return (
-    product.attributes.price >= filterPrice[0] &&
-    product.attributes.price <= filterPrice[1]
-  );
+const filterPriceType = (
+  filterPrice: (number | '')[],
+  product: ProductData
+) => {
+  const min = filterPrice[0] === '' ? 0 : filterPrice[0];
+  const max = filterPrice[1] === '' ? Infinity : filterPrice[1];
+  return product.attributes.price >= min && product.attributes.price <= max;
 };
 
 export const selectProducts = createAppSelector(

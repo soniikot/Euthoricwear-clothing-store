@@ -19,6 +19,6 @@ RUN npm run build
 
 # Expose the port the app runs on
 EXPOSE 5173
-
 # Run the app
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "start"]
+
