@@ -11,7 +11,7 @@ module.exports = [
         "http://localhost:5173",
         "http://62.72.5.244:5173",
         "http://62.72.5.244:8000",
-        "https://euphoricwear.shop/",
+        "https://euphoricwear.shop",
       ],
       headers: ["authorization", "content-type", "accept"],
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
