@@ -21,8 +21,9 @@
 
 .brands_container {
   padding-top: 65px;
+  flex-wrap: wrap;
   display: flex;
-  gap:15px;
+  gap: 15px;
   justify-content: center;
   padding-bottom: 65px;
 }
@@ -35,7 +36,7 @@
   .brands_container img {
     width: 60px;
   }
-  .brands_container{
-    gap:5px;
+  .brands_container {
+    gap: 5px;
   }
 }
