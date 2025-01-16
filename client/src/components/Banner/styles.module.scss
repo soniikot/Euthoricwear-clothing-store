@@ -12,12 +12,14 @@
   background-size: cover;
   color: white;
   border-radius: 10px;
-  padding: 180px 70px 10px 70px;
+  padding: 50px 70px 10px 70px;
 }
 
 .text {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  place-content: center;
+  height: 100%;
+  gap: 20px;
 }
 
 .image_wrapper {
