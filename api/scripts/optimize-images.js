@@ -12,32 +12,21 @@ if (!fs.existsSync(optimizedDir)) {
 const optimizeImages = async () => {
   const files = fs
     .readdirSync(uploadDir)
-    .filter(
-      (file) =>
-        file.endsWith(".jpg") || file.endsWith(".jpeg") 
-    );
+    .filter((file) => file.endsWith(".jpg") || file.endsWith(".jpeg"));
 
   for (let file of files) {
     const filePath = path.join(uploadDir, file);
-    const optimizedImagePath = path.join(
-      optimizedDir,
-  
-      `${path.basename(file, path.extname(file))}.webp`
-    ); 
+    const optimizedImagePath = path.join(optimizedDir, file);
 
     try {
-    
       const optimizedBuffer = await sharp(filePath)
-        .webp({ quality: 60 }) 
-        .resize({ width: 1000, withoutEnlargement: true }) 
+        .resize({ width: 1000, withoutEnlargement: true })
         .toBuffer();
-
 
       const optimizedFileDir = path.dirname(optimizedImagePath);
       if (!fs.existsSync(optimizedFileDir)) {
         fs.mkdirSync(optimizedFileDir, { recursive: true });
       }
-
 
       fs.writeFileSync(optimizedImagePath, optimizedBuffer);
     } catch (error) {
