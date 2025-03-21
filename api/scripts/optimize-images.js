@@ -21,6 +21,7 @@ const optimizeImages = async () => {
     const filePath = path.join(uploadDir, file);
     const optimizedImagePath = path.join(
       optimizedDir,
+  
       `${path.basename(file, path.extname(file))}.webp`
     ); 
 
@@ -28,6 +29,7 @@ const optimizeImages = async () => {
     
       const optimizedBuffer = await sharp(filePath)
         .webp({ quality: 60 }) 
+        .resize({ width: 1000, withoutEnlargement: true }) 
         .toBuffer();
 
 
