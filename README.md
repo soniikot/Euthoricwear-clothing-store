@@ -22,3 +22,6 @@ This project is a clothing website that allows users to browse and purchase vari
 - Product search and filtering 
 - Add items to favourite products
 
+## Live
+
+https://euphoricwear.shop/
