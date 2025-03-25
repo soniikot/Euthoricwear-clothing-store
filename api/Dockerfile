@@ -20,16 +20,13 @@ FROM node:20-alpine
 WORKDIR /api
 
 # Copy built assets and source code from the builder stage
-COPY --from=builder /api ./
+COPY . .
 
 # Create .tmp directory and ensure proper permissions
-RUN mkdir -p .tmp && chown -R node:node .tmp
+RUN mkdir -p .tmp && chown -R root:root .tmp
 
 # Copy existing database if it exists (will be ignored if file doesn't exist)
-COPY --chown=node:node .tmp/data.db .tmp/
-
-# Switch to non-root user
-USER node
+COPY --chown=root:root .tmp/data.db .tmp/
 
 # Expose the port that Strapi uses (default 1337)
 EXPOSE 1337
