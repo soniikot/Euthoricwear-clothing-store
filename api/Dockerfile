@@ -1,24 +1,38 @@
-# Client Dockerfile
-# Use an official Node.js runtime as the base image
-FROM node:20
+# Build Stage
+FROM node:20-alpine AS builder
 
-# Set the working directory in the container
+# Set the working directory
 WORKDIR /api
 
-# Copy the package.json and package-lock.json files
-COPY package*.json ./
+COPY package.json package-lock.json ./
 
-# Install dependencies
+# Install dependencies (including dev dependencies for the build)
 RUN npm ci
 
-# Copy the rest of the app files
+# Copy the rest of your application source code
 COPY . .
 
-# Build the app (replace this with your build command if it's different)
+# Build the Strapi admin panel and other production assets.
 RUN npm run build
 
-# Expose the port the app runs on
+# Production Stage
+FROM node:20-alpine
+WORKDIR /api
+
+# Copy built assets and source code from the builder stage
+COPY --from=builder /api ./
+
+# Create .tmp directory and ensure proper permissions
+RUN mkdir -p .tmp && chown -R node:node .tmp
+
+# Copy existing database if it exists (will be ignored if file doesn't exist)
+COPY --chown=node:node .tmp/data.db .tmp/
+
+# Switch to non-root user
+USER node
+
+# Expose the port that Strapi uses (default 1337)
 EXPOSE 1337
 
-# Run the app
-CMD ["npm", "run", "develop"]
+# Start Strapi in production mode
+CMD ["npm", "start"]

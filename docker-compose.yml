@@ -5,10 +5,11 @@ services:
       context: ./client
       dockerfile: Dockerfile
     ports:
-      - "5173:5173"
-
+      - 80:80
     networks:
       - strapi
+    depends_on:
+      - api
     environment:
       VITE_API_URL: ${VITE_API_URL}
       VITE_API_UPLOAD_URL: ${VITE_API_UPLOAD_URL}
@@ -19,7 +20,7 @@ services:
       context: ./api
       dockerfile: Dockerfile
     ports:
-      - "1337:1337"
+      - 1337:1337
     networks:
       - strapi
     environment:
@@ -30,8 +31,15 @@ services:
       CLIENT_URL: ${CLIENT_URL}
       HOST: 0.0.0.0
       PORT: 1337
+      NODE_ENV: production
       APP_KEYS: ${APP_KEYS}
       API_TOKEN_SALT: ${API_TOKEN_SALT}
       ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
+    volumes:
+      - ./api/.tmp:/api/.tmp
+
+volumes:
+  api_data:
+
 networks:
   strapi:
