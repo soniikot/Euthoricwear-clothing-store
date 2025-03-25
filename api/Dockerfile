@@ -23,13 +23,11 @@ WORKDIR /api
 COPY --from=builder /api ./
 
 # Create .tmp directory and ensure proper permissions
-RUN mkdir -p .tmp && chown -R node:node .tmp
+RUN mkdir -p .tmp && chown -R root:root .tmp
 
 # Copy existing database if it exists (will be ignored if file doesn't exist)
-COPY --chown=node:node .tmp/data.db .tmp/
+COPY --chown=root:root .tmp/data.db .tmp/
 
-# Switch to non-root user
-USER node
 
 # Expose the port that Strapi uses (default 1337)
 EXPOSE 1337
