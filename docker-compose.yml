@@ -5,7 +5,7 @@ services:
       context: ./client
       dockerfile: Dockerfile
     ports:
-      - 80:80
+      - 5173:8080
     networks:
       - strapi
     depends_on:
