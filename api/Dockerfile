@@ -26,8 +26,7 @@ COPY --from=builder /api ./
 RUN mkdir -p .tmp && chown -R root:root .tmp
 
 # Copy existing database if it exists (will be ignored if file doesn't exist)
-COPY --chown=root:root .tmp/data.db .tmp/
-
+VOLUME ["/api/.tmp"]
 
 # Expose the port that Strapi uses (default 1337)
 EXPOSE 1337

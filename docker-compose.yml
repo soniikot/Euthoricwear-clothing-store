@@ -36,10 +36,10 @@ services:
       API_TOKEN_SALT: ${API_TOKEN_SALT}
       ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET}
     volumes:
-      - ./api/.tmp:/api/.tmp
+      - api_tmp:/api/.tmp
 
 volumes:
-  api_data:
+  api_tmp:
 
 networks:
   strapi:
