@@ -9,6 +9,8 @@ module.exports = [
     config: {
       origin: [
         "http://localhost:5173",
+        "http://localhost:80",
+        "http://localhost",
         "http://62.72.5.244:5173",
         "http://62.72.5.244:8000",
         "https://euphoricwear.shop",
